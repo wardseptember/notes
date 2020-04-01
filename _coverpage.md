@@ -1,22 +1,11 @@
-<!-- 
-# Notes
+<img width="200px" src="_media/logo.png">
 
+### **CS-Learning**
 
-> Java学习笔记，包括JVM、多线程高并发、Spring Boot、Spring Cloud、Mysql原理、Redis原理、剑指Offer等等
+个人学习过程中的笔记，目前主要包括 Java，算法题解和工具类。
 
+[![stars](https://badgen.net/github/stars/dreamwhigh/CS-Learning?icon=github&color=4ab8a1)]((<https://github.com/dreamwhigh/CS-Learning>)) [![forks](https://badgen.net/github/forks/dreamwhigh/CS-Learning?icon=github&color=4ab8a1)](<https://github.com/dreamwhigh/CS-Learning>)
 
-[CSDN](https://blog.csdn.net/wardseptember)
-[Getting Started](#introduction) -->
+[GitHub](<https://github.com/dreamwhigh/CS-Learning>)
+[Get Started](README.md)
 
-![logo](_media/icon.svg)
-
-# docsify <small>3.5</small>
-
-> A magical documentation site generator.
-
-- Simple and lightweight (~21kB gzipped)
-- No statically built html files
-- Multiple themes
-
-[GitHub](https://github.com/docsifyjs/docsify/)
-[Get Started](#docsify)
