@@ -1,4 +1,4 @@
-<img width="200px" src="_media/logo.png">
+<img width="200px" src="media/logo.png">
 
 ### **Notes**
 
