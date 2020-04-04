@@ -18,7 +18,7 @@
 关注我获得最新笔记、更多资源。
 ![](http://wardseptember.club/Fsis2Lao1zRA-RpbsTEDA0_z04wb)
 ## GPL v2.0
-[LICENSE](LICENSE)
+[LICENSE](https://github.com/wardseptember/notes/blob/master/LICENSE)
 ## 捐赠
 ![微信收款码](http://wardseptember.club/FmzrIpcySQ5Vho-g9GE9fyygMRtn)
 ## 联系方式
