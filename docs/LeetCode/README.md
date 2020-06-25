@@ -9,7 +9,10 @@
 
 > 这个模板主要是介绍了一些通用的刷题模板，以及一些常见问题，如到底要刷多少题，按什么顺序来刷题，如何提高刷题效率等。
 
+
+
 ## 在线阅读
+
 * [Github Pages](https://wardseptember.github.io/notes/#/)
 * [Notes镜像地址](https://wardseptember.gitee.io/mynotes)
 
@@ -20,31 +23,35 @@
 ## 核心内容
 ### 入门篇
 
-- [算法快速入门](introduction/quickstart.md)
+- [算法快速入门](/docs/LeetCode/introduction/quickstart.md)
 
 ### 数据结构篇
 
-- [二叉树](data_structure/binary_tree.md)
-- [链表](data_structure/linked_list.md)
-- [栈和队列](data_structure/stack_queue.md)
-- [二进制](data_structure/binary_op.md)
+- [二叉树](/docs/LeetCode/data_structure/binary_tree.md)
+- [链表](/docs/LeetCode/data_structure/linked_list.md)
+- [栈和队列](/docs/LeetCode/data_structure/stack_queue.md)
+- [二进制](/docs/LeetCode/data_structure/binary_op.md)
 
 ### 基础算法篇
 
-- [二分搜索](basic_algorithm/binary_search.md)
-- [排序算法](basic_algorithm/sort.md)
-- [动态规划](basic_algorithm/dp.md)
+- [二分搜索](/docs/LeetCode/basic_algorithm/binary_search.md)
+- [排序算法](/docs/LeetCode/basic_algorithm/sort.md)
+- [动态规划](/docs/LeetCode/basic_algorithm/dp.md)
 
 ### 算法思维
 
-- [递归思维](advanced_algorithm/recursion.md)
-- [滑动窗口思想](advanced_algorithm/slide_window.md)
-- [二叉搜索树](advanced_algorithm/binary_search_tree.md)
-- [回溯法](advanced_algorithm/backtrack.md)
+- [递归思维](/docs/LeetCode/advanced_algorithm/recursion.md)
+- [滑动窗口思想](/docs/LeetCode/advanced_algorithm/slide_window.md)
+- [二叉搜索树](/docs/LeetCode/advanced_algorithm/binary_search_tree.md)
+- [回溯法](/docs/LeetCode/advanced_algorithm/backtrack.md)
 
 ## 可视化数据结构
 这是个学习数据结构的神器，基本上包含常用数据结构的所有可视化过程哦。
+
 下图是红黑树插入节点和删除节点的演示，关注公众号**大数据技术与机器学习**，后台回复"可视化数据结构"获取网站地址哦。(或者直接扫描下方二维码关注公众号)
+
+
+
 ![红黑树](https://wardseptember.gitee.io/mynotes/media/red-black-tree.gif)
 
 ## 心得体会
@@ -62,7 +69,7 @@
 
 1、 [algorithm-pattern 练习题](https://greyireland.gitbook.io/algorithm-pattern/)
 
-![练习题](https://img.fuiboom.com/img/repo_practice.png)
+![](http://wardseptember.club/FvaIciijHmUi8L8UH8JFKItzmdKi)
 
 
 2、 [剑指 offer](https://leetcode-cn.com/problemset/lcof/)
