@@ -7,7 +7,7 @@
 
 [![stars](https://badgen.net/github/stars/wardseptember/notes?icon=github&color=4ab8a1)](https://github.com/wardseptember/notes) [![forks](https://badgen.net/github/forks/wardseptember/notes?icon=github&color=4ab8a1)](<https://github.com/wardseptember/notes>)
 
-### 在线阅读
+#### 在线阅读
 
 * [Github Pages](https://wardseptember.github.io/notes/#/)
 
@@ -32,7 +32,11 @@
 
 ## 可视化数据结构
 这是个学习数据结构的神器，基本上包含常用数据结构的所有可视化过程哦。
+
 下图是红黑树插入节点和删除节点的演示，关注公众号**大数据技术与机器学习**，后台回复"可视化数据结构"获取网站地址哦。(或者直接扫描下方二维码关注公众号)
+
+
+
 ![红黑树](https://wardseptember.gitee.io/mynotes/media/red-black-tree.gif)
 
 ## 公众号
