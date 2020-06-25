@@ -7,21 +7,43 @@
 
 [![stars](https://badgen.net/github/stars/wardseptember/notes?icon=github&color=4ab8a1)](https://github.com/wardseptember/notes) [![forks](https://badgen.net/github/forks/wardseptember/notes?icon=github&color=4ab8a1)](<https://github.com/wardseptember/notes>)
 
-[Notes镜像地址](https://wardseptember.gitee.io/mynotes)
-## Java
-* [Java基础笔记](/docs/Java基础笔记.md)
-* [JVM学习笔记](/docs/JVM学习笔记.md)
+### 在线阅读
+
+* [Github Pages](https://wardseptember.github.io/notes/#/)
+
+* [Notes国内镜像地址](https://wardseptember.gitee.io/mynotes)
+
+同步更新哦
 
 ---
 
+## 核心内容
+
+### Java
+
+* [Java基础笔记](/docs/Java基础笔记.md)
+* [JVM学习笔记](/docs/JVM学习笔记.md)
+
+### 算法
+
+* [LeetCode题解](/docs/LeetCode/README.md)
+
+---
+
+## 可视化数据结构
+这是个学习数据结构的神器，基本上包含常用数据结构的所有可视化过程哦。
+下图是红黑树插入节点和删除节点的演示，关注公众号**大数据技术与机器学习**，后台回复"可视化数据结构"获取网站地址哦。(或者直接扫描下方二维码关注公众号)
+![红黑树](https://wardseptember.gitee.io/mynotes/media/red-black-tree.gif)
+
 ## 公众号
+
 关注我获得最新笔记、更多资源。
 ![](http://wardseptember.club/Fsis2Lao1zRA-RpbsTEDA0_z04wb)
 ## GPL v2.0
 [LICENSE](https://github.com/wardseptember/notes/blob/master/LICENSE)
+
 ## 捐赠
 ![微信收款码](http://wardseptember.club/FmzrIpcySQ5Vho-g9GE9fyygMRtn)
 ## 联系方式
 
 - E-mail : <wardseptember@163.com>
-
