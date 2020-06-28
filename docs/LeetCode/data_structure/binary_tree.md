@@ -183,8 +183,12 @@ public class Solution {
         List<Integer> right = divideAndConquer(node.right);
         // 合并结果
         result.add(node.val);
-        result.addAll(left);
-        result.addAll(right);
+      	if (left != null) {
+            result.addAll(left);
+        }
+        if (right != null) {
+            result.addAll(right);
+        }
         return result;
     }
 }
