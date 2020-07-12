@@ -2,7 +2,7 @@
 
 本项目的 GITHUB 开源地址：[https://github.com/wardseptember/notes](https://github.com/wardseptember/notes)
 
-如果你在阅读本项目的过程中有发现不明白或者错误的地方，请随时到项目地址发布 issue 或者 fork 项目后发布 pr 帮助译者改善！不胜感激！
+如果你在阅读本项目的过程中有发现不明白或者错误的地方，请随时到项目地址发布 issue 或者 fork 项目后发布 PR 帮助作者改善！不胜感激！
 # Notes
 
 [![stars](https://badgen.net/github/stars/wardseptember/notes?icon=github&color=4ab8a1)](https://github.com/wardseptember/notes) [![forks](https://badgen.net/github/forks/wardseptember/notes?icon=github&color=4ab8a1)](<https://github.com/wardseptember/notes>)
@@ -30,6 +30,26 @@
 
 * [LeetCode题解](/docs/LeetCode/README.md)
 
+### 多线程和高并发
+
+* [多线程和高并发](/docs/多线程和高并发.md)
+
+### 操作系统
+
+* 操作系统基础<https://cyc2018.github.io/CS-Notes/#/notes/计算机操作系统%20-%20目录1>
+
+### 网络
+
+* 计算机网络<https://cyc2018.github.io/CS-Notes/#/notes/计算机网络%20-%20目录1>
+
+* [Socket](/docs/Socket.md)
+* [HTTP](https://cyc2018.github.io/CS-Notes/#/notes/HTTP)
+
+### 机器学习
+
+* [集成学习](/docs/集成学习.md)
+* [联邦学习](/docs/联邦学习笔记.md)
+
 ---
 
 ## 可视化数据结构
@@ -45,6 +65,7 @@
 
 关注我获得最新笔记、更多资源。
 ![](http://wardseptember.club/Fsis2Lao1zRA-RpbsTEDA0_z04wb)
+
 ## GPL v2.0
 [LICENSE](https://github.com/wardseptember/notes/blob/master/LICENSE)
 
