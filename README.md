@@ -29,6 +29,7 @@
 ### 算法
 
 * [LeetCode题解](/docs/LeetCode/README.md)
+* [剑指Offer题解](/docs/剑指Offer/README.md)
 
 ### 多线程和高并发
 
@@ -36,19 +37,26 @@
 
 ### 操作系统
 
-* 操作系统基础<https://cyc2018.github.io/CS-Notes/#/notes/计算机操作系统%20-%20目录1>
+* [操作系统基础](https://cyc2018.github.io/CS-Notes/#/notes/计算机操作系统%20-%20目录1)
 
 ### 网络
 
-* 计算机网络<https://cyc2018.github.io/CS-Notes/#/notes/计算机网络%20-%20目录1>
-
+* [计算机网络](https://cyc2018.github.io/CS-Notes/#/notes/计算机网络%20-%20目录1)
 * [Socket](/docs/Socket.md)
 * [HTTP](https://cyc2018.github.io/CS-Notes/#/notes/HTTP)
+
+### Nginx
+
+* [Nginx](/docs/Nginx学习笔记.md)
 
 ### 机器学习
 
 * [集成学习](/docs/集成学习.md)
 * [联邦学习](/docs/联邦学习笔记.md)
+
+### GIT
+
+* [Git教程](/docs/git教程.md)
 
 ---
 
