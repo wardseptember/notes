@@ -1,4 +1,4 @@
-# 作者的话
+# 写作前面
 
 本项目的 GITHUB 开源地址：[https://github.com/wardseptember/notes](https://github.com/wardseptember/notes)
 
@@ -13,7 +13,7 @@
 
 * [Github Pages](https://wardseptember.github.io/notes/#/)
 
-* [Notes国内镜像地址](https://wardseptember.gitee.io/mynotes)
+* [Gitee Pages](https://wardseptember.gitee.io/mynotes)
 
 同步更新哦
 
@@ -49,6 +49,10 @@
 
 * [Nginx](/docs/Nginx学习笔记.md)
 
+### 设计模式
+
+* [设计模式](/docs/设计模式.md)
+
 ### 机器学习
 
 * [集成学习](/docs/集成学习.md)
@@ -77,8 +81,7 @@
 ## GPL v2.0
 [LICENSE](https://github.com/wardseptember/notes/blob/master/LICENSE)
 
-## 捐赠
-![微信收款码](http://wardseptember.club/FmzrIpcySQ5Vho-g9GE9fyygMRtn)
 ## 联系方式
 
 - E-mail : <wardseptember@163.com>
+
