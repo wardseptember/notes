@@ -493,6 +493,20 @@ like 'xxx%'
 
 使用union all 或者union来代替
 
+### 重要！！！
+
+> 索引失效将导致行锁变表锁
+
+### 间隙锁
+
+当我们用范围条件而不是相等条件检索数据，并请求共享或者排他锁时，innodb会给符合条件的已有数据记录的索引项加锁；对于键值在条件范围内但并不存在的记录，叫做“间隙”。
+
+innodb也会对这个间隙加锁，这种锁机制就是所谓的间隙锁(Next-Key锁)。
+
+因为Query执行过程中通过范围查找的话，他会锁定整个范围内所有的索引键值，即使这个键值并不存在。
+
+间隙锁有一个比较致命的弱点，就是当锁定一个范围键值之后，即使某些不存在的键值也会被无辜的锁定，而造成在锁定的时候无法插入锁定键值范围内的任何数据。在某些场景下这可能会对性能造成很大的危害。
+
 ### 口诀
 
 全职匹配我最爱，最左前缀要遵守; 
@@ -507,9 +521,13 @@ LIKE 百分写最右，覆盖索引不写*;
 
 VAR 引号不可丢，SQL 优化有诀窍。
 
+
+
 # 详细资料下载
 
 * [MySQL高级——思维导图.pdf](https://gitee.com/wardseptember/mynotes/tree/master/docs/Mysql)
 * [Mysql高级.mmap](https://gitee.com/wardseptember/mynotes/tree/master/docs/Mysql)
 * [Mysql高级详细.pdf](https://gitee.com/wardseptember/mynotes/tree/master/docs/Mysql)
+
+* [Mysql调优视频教程]()
 
