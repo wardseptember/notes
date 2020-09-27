@@ -44,6 +44,13 @@
 
 * [操作系统基础](https://cyc2018.github.io/CS-Notes/#/notes/计算机操作系统%20-%20目录1)
 
+### 数据库
+
+* [数据库系统原理](https://cyc2018.github.io/CS-Notes/#/notes/数据库系统原理)
+* [SQL](https://cyc2018.github.io/CS-Notes/#/notes/SQL)
+* [Mysql基础](https://cyc2018.github.io/CS-Notes/#/notes/MySQL)
+* [Mysql调优](/docs/Mysql/mysql调优笔记.md)
+
 ### 网络
 
 * [计算机网络](https://cyc2018.github.io/CS-Notes/#/notes/计算机网络%20-%20目录1)
