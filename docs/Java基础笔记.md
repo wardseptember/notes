@@ -2129,142 +2129,39 @@ public class Main {
 }
 ```
 
+## HashMap（基于jdk 1.8和jdk 1.7）
 
-
-## HashMap（基于jdk 1.8）
-
-`HashMap`结构图：
-
-![](http://wardseptember.club/FjO6pGCUZafcw5DGVmQnv0-kPrL5)
-
- HashMap：它根据键的hashCode值存储数据，大多数情况下可以直接定位到它的值，因而具有很快的访问速度，但遍历顺序却是不确定的。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null。HashMap非线程安全，即任一时刻可以有多个线程同时写HashMap，可能会导致数据的不一致。如果需要满足线程安全，可以用 Collections的synchronizedMap方法使HashMap具有线程安全的能力，或者使用ConcurrentHashMap。
-
-默认的初始容量是16
-默认的负载因子0.75
-当桶上的结点数大于8会转成红黑树
-当桶上的结点数小于6红黑树转链表
-Node<k,v>[] table //存储元素的哈希桶数组，总是2的幂次倍
-
-### 为什么哈希数组table的大小必须是2的倍数（合数）？
-
-看一下hashmap的源码：
-
-```java
-//计算hash值
-static final int hash(Object key) {
-int h;
-return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-}
-```
-
-`h >>> 16`表示无符号右移16位，低位挤走，高位补0；^ 为按位异或，即转成二进制后，相异为1，相同为0；由此可发现，当传入的值小于 2的16次方-1 时，调用这个方法返回的值，都是自身的值。
-
-右位移16位，正好是32bit的一半，自己的高半区和低半区做异或，就是为了混合原始哈希码的高位和低位，以此来加大低位的随机性。而且混合后的低位掺杂了高位的部分特征，这样高位的信息也被变相保留下来。
-假如没有进行高位运算，那最后参与运算的永远只是取模运算的最后几位，相似性会比较大。
-
-[JDK 源码中 HashMap 的 hash 方法原理](https://link.jianshu.com/?t=https%3A%2F%2Fwww.zhihu.com%2Fquestion%2F20733617%2Fanswer%2F111577937)
-
-![](http://wardseptember.club/FviYD1i2KPPm7G3Ocar06b8y7gi5)
-
-*hash函数的主要作用就是：增大随机性，减少碰撞。*
-
-hashmap中put的源码:
-
-```java
-//put源码
-public V put(K key, V value) {
-	return putVal(hash(key), key, value, false, true);
-}
-final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-                   boolean evict) {
-        Node<K,V>[] tab; Node<K,V> p; int n, i;
-        if ((tab = table) == null || (n = tab.length) == 0)
-            n = (tab = resize()).length;
-        if ((p = tab[i = (n - 1) & hash]) == null)
-            tab[i] = newNode(hash, key, value, null);
-        else {
-            Node<K,V> e; K k;
-            if (p.hash == hash &&
-                ((k = p.key) == key || (key != null && key.equals(k))))
-                e = p;
-            else if (p instanceof TreeNode)
-                e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
-            else {
-                for (int binCount = 0; ; ++binCount) {
-                    if ((e = p.next) == null) {
-                        p.next = newNode(hash, key, value, null);
-                        if (binCount >= TREEIFY_THRESHOLD - 1) // -1 for 1st
-                            treeifyBin(tab, hash);
-                        break;
-                    }
-                    if (e.hash == hash &&
-                        ((k = e.key) == key || (key != null && key.equals(k))))
-                        break;
-                    p = e;
-                }
-            }
-            if (e != null) { // existing mapping for key
-                V oldValue = e.value;
-                if (!onlyIfAbsent || oldValue == null)
-                    e.value = value;
-                afterNodeAccess(e);
-                return oldValue;
-            }
-        }
-        ++modCount;
-        if (++size > threshold)
-            resize();
-        afterNodeInsertion(evict);
-        return null;
-    }
-```
-
-里面非常巧妙的代码是`p = tab[i = (n - 1) & hash]`，tab是hashmap存放存放元素的数组，`(n - 1) & hash`也解释了为什么table的大小要是2的倍数。
-
-如果n是默认大小16，没有扩容，`(n - 1) & hash`的计算结果就是hash值本身；见下图：
-
-![](http://wardseptember.club/FnoOXwzol6IFaNzkiZtRkKr5H32a)
-
-如果n扩容，扩容大小是原大小*2，为什么n一定要是2的倍数？举个例子：
-
-```java
-设：oldCap=16 二进制为：0001 0000  // oldCap是扩容之前的table大小
-oldCap-1=15 二进制为：0000 1111   // 如果oldCap是2的倍数，低位就全部是1，与hash进行&运算，hash值不变
-e1.hash=10 二进制为：0000 1010
-e2.hash=26 二进制为：0101 1010
-e1在扩容前的位置为：e1.hash & oldCap-1  结果为：0000 1010 
-e2在扩容前的位置为：e2.hash & oldCap-1  结果为：0000 1010 
-结果相同，所以e1和e2在扩容前在同一个链表上，这是扩容之前的状态。
-        
-现在扩容后，需要重新计算元素的位置，在扩容前的链表中计算地址的方式为e.hash & oldCap-1
-那么在扩容后应该也这么计算呀，扩容后的容量为oldCap*2=32 0010 0000 newCap=32，新的计算
-方式应该为
-e1.hash & newCap-1 
-即：0000 1010 & 0001 1111 
-结果为0000 1010与扩容前的位置完全一样。
-e2.hash & newCap-1 
-即：0101 1010 & 0001 1111 
-结果为0001 1010,为扩容前位置+oldCap。
-```
-由此可见，扩容后的hashmap本来存在的数据位置不用改变，新增的数据的存储位置是扩容前位置+oldCap，直接可以计算出扩容后的位置，减少了一次求hash值的次数(不需要像JDK1.7的实现那样重新计算hash)；而且将有冲突的数据均匀的分散到新的空间上；而且&运算比%取模运算要快；
-
-当桶上的结点数大于8会转成红黑树：
-
-![](http://wardseptember.club/FilCh0t268Fot12pqsnGGsw3YVG-)
-
-红黑树的查找速度更快，查找速度优化为O(logn)。
-
-- [30张图带你彻底理解红黑树](https://www.jianshu.com/p/e136ec79235c)
-
-- [关于红黑树(R-B tree)原理，看这篇如何](https://www.cnblogs.com/LiaHon/p/11203229.html)
-- [可视化动态生成红黑树](https://www.cs.usfca.edu/~galles/visualization/RedBlack.html)
-
-### 参考链接
-
-- https://www.jianshu.com/p/dc13f825b71f
-- https://www.cnblogs.com/duodushuduokanbao/p/9492952.html
-- https://blog.csdn.net/qq_37113604/article/details/81353626
-- https://www.zhihu.com/question/20733617/answer/111577937
+HashMap这个笔记有点多，我专门整理成一个专题，可以去看[hashmap详解专题](https://wardseptember.github.io/notes/#/docs/HashMap详解(1.7和1.8))
 
 # Java多线程与高并发
+
+# IO
+
+## IO简介
+
+IO是指Input/Output，即输入和输出。以内存为中心：
+
+- Input指从外部读入数据到内存，例如，把文件从磁盘读取到内存，从网络读取数据到内存等等。
+- Output指把数据从内存输出到外部，例如，把数据从内存写入到文件，把数据从内存输出到网络等等。
+
+### InputStream / OutputStream
+
+IO流以`byte`（字节）为最小单位，因此也称为*字节流*。
+
+### Reader / Writer
+
+如果我们需要读写的是字符，并且字符不全是单字节表示的ASCII字符，那么，按照`char`来读写显然更方便，这种流称为*字符流*。
+
+## File对象
+
+在计算机系统中，文件是非常重要的存储方式。Java的标准库`java.io`提供了`File`对象来操作文件和目录。
+
+`File`对象既可以表示文件，也可以表示目录。特别要注意的是，构造一个`File`对象，即使传入的文件或目录不存在，代码也不会出错，因为构造一个`File`对象，并不会导致任何磁盘操作。只有当我们调用`File`对象的某些方法的时候，才真正进行磁盘操作。
+
+Java标准库的`java.io.File`对象表示一个文件或者目录：
+
+- 创建`File`对象本身不涉及IO操作；
+- 可以获取路径／绝对路径／规范路径：`getPath()`/`getAbsolutePath()`/`getCanonicalPath()`；
+- 可以获取目录的文件和子目录：`list()`/`listFiles()`；
+- 可以创建或删除文件和目录。
 
