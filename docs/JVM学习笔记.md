@@ -6,11 +6,11 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 
 JDK 1.8之前：
 
-![](http://wardseptember.club/FpJKe1Oj5-IsogbkudF_Elk6TcTM)
+![](http://wardseptember.top/FpJKe1Oj5-IsogbkudF_Elk6TcTM)
 
 JDK 1.8之后：
 
-![](http://wardseptember.club/FjY2BjT7WR4ElQIrXmjcHLnpQ-xQ)
+![](http://wardseptember.top/FjY2BjT7WR4ElQIrXmjcHLnpQ-xQ)
 
 线程私有的：程序计数器、虚拟机栈、本地方法栈
 
@@ -77,11 +77,11 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作**GC 堆（G
 
 * 永生代(Permanent Generation)
 
-![](http://wardseptember.club/FjBkP_GawX08HbwWJumNxi32bh-N)
+![](http://wardseptember.top/FjBkP_GawX08HbwWJumNxi32bh-N)
 
 JDK 8 版本之后方法区（HotSpot 的永久代）被彻底移除了（JDK1.7 就已经开始了），取而代之是元空间，元空间使用的是直接内存。
 
-![](http://wardseptember.club/Fnpe0SEzyHeX0I4cx540FWpLBthR)
+![](http://wardseptember.top/Fnpe0SEzyHeX0I4cx540FWpLBthR)
 
 **上图所示的 Eden 区、两个 Survivor 区都属于新生代（为了区分，这两个 Survivor 区域按照顺序被命名为 s1 和 s2），中间一层属于老年代。**
 
@@ -146,7 +146,7 @@ JDK 1.8之后使用元空间（存放在内存里）替代方法区，为什么�
 
 **JDK1.7 及之后版本的 JVM 已经将运行时常量池从方法区中移了出来，在 Java 堆（Heap）中开辟了一块区域存放运行时常量池。**
 
-![](http://wardseptember.club/FrgBFXSOSaXbdVc_DkRBSeGmCmoW)
+![](http://wardseptember.top/FrgBFXSOSaXbdVc_DkRBSeGmCmoW)
 
 ### 直接内存
 
@@ -162,7 +162,7 @@ JDK1.4 中新加入的 **NIO(New Input/Output) 类**，引入了一种基于**�
 
 通过上面的介绍我们大概知道了虚拟机的内存情况，下面我们来详细的了解一下 HotSpot 虚拟机在 Java 堆中对象分配、布局和访问的全过程。
 
-![](http://wardseptember.club/Fo0HXIrJtpUVKi0Oi3kQYebs6d9c)
+![](http://wardseptember.top/Fo0HXIrJtpUVKi0Oi3kQYebs6d9c)
 
 #### Step1:类加载检查
 
@@ -176,7 +176,7 @@ JDK1.4 中新加入的 **NIO(New Input/Output) 类**，引入了一种基于**�
 
 选择以上两种方式中的哪一种，取决于 Java 堆内存是否规整。而 Java 堆内存是否规整，取决于 GC 收集器的算法是"标记-清除"，还是"标记-整理"（也称作"标记-压缩"），值得注意的是，复制算法内存也是规整的。
 
-![](http://wardseptember.club/FgWuHlpLx3om_5Z3wfwDATlMhuDK)
+![](http://wardseptember.top/FgWuHlpLx3om_5Z3wfwDATlMhuDK)
 
 **内存分配并发问题**
 
@@ -213,7 +213,7 @@ JDK1.4 中新加入的 **NIO(New Input/Output) 类**，引入了一种基于**�
 
 在32位的HotSpot虚拟机中，Mark Word存储内容如下:
 
-![](http://wardseptember.club/Fg-dwM3e2MBTKS1D4-80y-gk0nA8)
+![](http://wardseptember.top/Fg-dwM3e2MBTKS1D4-80y-gk0nA8)
 
 如：在对象未被锁时，Mark Word的25bit存储对象的hashcode，4bit存储分代年龄，1bit表示是否偏向锁，2bit用于存储锁标志位。**不用的锁状态用不同的锁标志位表示。**
 
@@ -241,11 +241,11 @@ HotSpot虚拟机默认的分配顺序为longs/doubles、ints、shorts/chars、by
 
 **句柄：** 如果使用句柄的话，那么 Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息；
 
-![](http://wardseptember.club/FsiwvYohav8Wl85mGSrBlGE_th7S)
+![](http://wardseptember.top/FsiwvYohav8Wl85mGSrBlGE_th7S)
 
 **直接指针：** 如果使用直接指针访问，那么 Java 堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而 reference 中存储的直接就是对象的地址。
 
-![](http://wardseptember.club/FhGoKq14OCho8xrKRR_YwDunPCGt)
+![](http://wardseptember.top/FhGoKq14OCho8xrKRR_YwDunPCGt)
 
 **这两种对象访问方式各有优势。使用句柄来访问的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要修改。使用直接指针访问方式最大的好处就是速度快，它节省了一次指针定位的时间开销。**
 
@@ -300,7 +300,7 @@ System.out.println(str3 == str5);//true
 System.out.println(str4 == str5);//false
 ```
 
-![](http://wardseptember.club/FnnTY_OuVcaBLRQ10ZVjDD4JJMmh)
+![](http://wardseptember.top/FnnTY_OuVcaBLRQ10ZVjDD4JJMmh)
 
 尽量避免多个字符串拼接，因为这样会重新创建对象。如果需要改变字符串的话，可以使用 StringBuilder 或者 StringBuffer。
 
@@ -435,7 +435,7 @@ System.out.println("40=i5+i6   " + (40 == i5 + i6)); // true
 
 ## 导论
 
-![](http://wardseptember.club/Fmeb6mftyN2qRY81Dr22IDcYimRf)
+![](http://wardseptember.top/Fmeb6mftyN2qRY81Dr22IDcYimRf)
 
 当需要排查各种内存溢出问题、当垃圾收集成为系统达到更高并发的瓶颈时，我们就需要对这些“自动化”的技术实施必要的监控和调节。
 
@@ -461,7 +461,7 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作**GC 堆（G
 
 **堆空间的基本结构：**
 
-![](http://wardseptember.club/FjaEIQYLzU19RKIG_MKpbJINrtTB)
+![](http://wardseptember.top/FjaEIQYLzU19RKIG_MKpbJINrtTB)
 
 上图所示的 eden 区、s0("From") 区、s1("To") 区都属于新生代，tentired 区属于老年代。大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s1("To")，并且对象的年龄还会加 1(Eden 区->Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 `-XX:MaxTenuringThreshold` 来设置。经过这次GC后，Eden区和"From"区已经被清空。这个时候，"From"和"To"会交换他们的角色，也就是新的"To"就是上次GC前的“From”，新的"From"就是上次GC前的"To"。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，"To"区被填满之后，会将所有对象移动到老年代中。
 
@@ -534,7 +534,7 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作**GC 堆（G
 
 堆中几乎放着所有的对象实例，对堆垃圾回收前的第一步就是要判断那些对象已经死亡（即不能再被任何途径使用的对象）。
 
-![](http://wardseptember.club/FpU3CdUgoDPlONFE8oxy3POz_WCX)
+![](http://wardseptember.top/FpU3CdUgoDPlONFE8oxy3POz_WCX)
 
 下面介绍判断一个对象是否死亡的两种方法。
 
@@ -563,7 +563,7 @@ public class ReferenceCountingGc {
 
 这个算法的基本思想就是通过一系列的称为 **“GC Roots”** 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的。
 
-![](http://wardseptember.club/FhecqywgkomeiqDXJeJNxZOTRtWE)
+![](http://wardseptember.top/FhecqywgkomeiqDXJeJNxZOTRtWE)
 
 在Java技术体系中，固定可作为GC Roots的对象包括以下几种：
 
@@ -805,13 +805,13 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 * 执行效率不稳定。如果Java堆中包含大量需要被回收的对象，这是必须进行大量的标记和清除动作，导致回收效率降低。
 * 内存空间碎片化。标记、清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致当以后程序运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
 
-![](http://wardseptember.club/FgqA2lgvgK9eHQQcDVeWaeyke-BD)
+![](http://wardseptember.top/FgqA2lgvgK9eHQQcDVeWaeyke-BD)
 
 ### 标记-复制算法
 
 为了解决标记-清除算法中的效率问题，“复制”收集算法出现了。它可以将内存分为大小相同的两块，每次使用其中的一块。当这一块的内存使用完后，就将还存活的对象复制到另一块去，然后再把使用的空间一次清理掉。这样就使每次的内存回收都是对内存区间的一半进行回收。
 
-![](http://wardseptember.club/FrewWCsCtIgaIZQaCcnlyQsxJuWd)
+![](http://wardseptember.top/FrewWCsCtIgaIZQaCcnlyQsxJuWd)
 
 缺点：
 
@@ -822,7 +822,7 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 
 根据老年代的特点提出的一种标记算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象回收，而是让所有存活的对象向一端移动，然后直接清理掉端边界以外的内存。
 
-![](http://wardseptember.club/FgsFWO2GkAGoSR_gsiECEez0Rtou)
+![](http://wardseptember.top/FgsFWO2GkAGoSR_gsiECEez0Rtou)
 
 缺点：
 
@@ -834,7 +834,7 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 
 ## 经典垃圾收集器
 
-![](http://wardseptember.club/Fmz83KfQnA5DUuyPiPBT50WPRXyA)
+![](http://wardseptember.top/Fmz83KfQnA5DUuyPiPBT50WPRXyA)
 
 以上是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用；图中收集器所处的区域，则表示它是属于新生代收集器或者是老年代收集器。
 
@@ -843,7 +843,7 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 
 ### Serial 收集器
 
-![](http://wardseptember.club/FkCjVVenZXClApirFOkIDPE_e0j5)
+![](http://wardseptember.top/FkCjVVenZXClApirFOkIDPE_e0j5)
 
 Serial（串行）收集器收集器是最基本、历史最悠久的垃圾收集器了。大家看名字就知道这个收集器是一个单线程收集器了。它的 **“单线程”** 的意义不仅仅意味着它只会使用一条垃圾收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集工作的时候必须暂停其他所有的工作线程（ **"Stop The World"** ），直到它收集结束。
 
@@ -855,7 +855,7 @@ Serial（串行）收集器收集器是最基本、历史最悠久的垃圾收�
 
 ### ParNew 收集器
 
-![](http://wardseptember.club/FpIifXxYw5uZGrS-9fiwLCF_dvRL)
+![](http://wardseptember.top/FpIifXxYw5uZGrS-9fiwLCF_dvRL)
 
 它是 Serial 收集器的多线程版本。
 
