@@ -33,6 +33,7 @@
 * [HashMap详解(基于jdk1.8和1.7)](/docs/HashMap详解(1.7和1.8).md)
 * [Hashtable详解](/docs/Hashtable详解.md)
 * [ConcurrentHashMap详解(基于1.7和1.8)](/docs/ConcurrentHashMap详解(基于1.7和1.8).md)
+* [三次握手、四次挥手、重传机制、滑动窗口、流量控制、拥塞控制、TCP/UDP全解析](/docs/计算机网络/传输层.md)
 
 ### 算法
 
@@ -84,14 +85,16 @@
 
 下图是红黑树插入节点和删除节点的演示，关注公众号**大数据技术与机器学习**，后台回复"可视化数据结构"获取网站地址哦。(或者直接扫描下方二维码关注公众号)
 
-
-
-![红黑树](https://wardseptember.gitee.io/mynotes/media/red-black-tree.gif)
+<div align="center"> <img src="https://wardseptember.gitee.io/mynotes/media/red-black-tree.gif" width="600"/> </div><br>
 
 ## 公众号
 
-关注我获得最新笔记、更多资源。
-![](http://wardseptember.club/Fsis2Lao1zRA-RpbsTEDA0_z04wb)
+关注我获得最新笔记、更多资源
+
+<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201013164148.png
+" width="600"/> </div><br>
+
+
 
 ## GPL v2.0
 [LICENSE](https://github.com/wardseptember/notes/blob/master/LICENSE)
