@@ -1,5 +1,5 @@
 # 写作前面
-
+test
 本项目的 GITHUB 开源地址：[https://github.com/wardseptember/notes](https://github.com/wardseptember/notes)
 
 如果你在阅读本项目的过程中有发现不明白或者错误的地方，请随时到项目地址发布 issue 或者 fork 项目后发布 PR 帮助作者改善！不胜感激！
