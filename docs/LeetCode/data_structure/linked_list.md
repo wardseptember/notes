@@ -405,7 +405,7 @@ public class Solution {
 }
 ```
 
-### [linked-list-cycle-ii](https://leetcode-cn.com/problems/https://leetcode-cn.com/problems/linked-list-cycle-ii/)
+### [linked-list-cycle-ii](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 
 > 给定一个链表，返回链表开始入环的第一个节点。  如果链表无环，则返回  `null`。
 
@@ -600,3 +600,4 @@ class Solution {
 - [ ] [linked-list-cycle-ii](https://leetcode-cn.com/problems/linked-list-cycle-ii/)
 - [ ] [palindrome-linked-list](https://leetcode-cn.com/problems/palindrome-linked-list/)
 - [ ] [copy-list-with-random-pointer](https://leetcode-cn.com/problems/copy-list-with-random-pointer/)
+
