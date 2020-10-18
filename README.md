@@ -51,6 +51,10 @@
 ### 操作系统
 
 * [操作系统基础](https://cyc2018.github.io/CS-Notes/#/notes/计算机操作系统%20-%20目录1)
+* [内存管理](/docs/操作系统/内存管理.md)
+* [进程和线程](/docs/操作系统/进程和线程.md)
+* [进程间通信的方式](/docs/操作系统/进程间通信的方式.md)
+* [调度算法](/docs/操作系统/调度算法.md)
 
 ### 数据库
 
@@ -105,8 +109,6 @@
 
 <div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201013164148.png
 " width="600"/> </div><br>
-
-
 
 ## GPL v2.0
 [LICENSE](https://github.com/wardseptember/notes/blob/master/LICENSE)
