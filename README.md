@@ -108,8 +108,8 @@
 
 关注我获得最新笔记、更多资源
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201013164148.png
-" width="600"/> </div><br>
+<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/gzh.jpg" width="600"/> </div><br>
+
 
 ## GPL v2.0
 [LICENSE](https://github.com/wardseptember/notes/blob/master/LICENSE)
