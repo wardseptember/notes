@@ -6,7 +6,7 @@ hashtable是线程安全的，代码里面加的synchronized。他实现了Map�
 
 hashtable默认大小为11，装填因子为0.75，也是基于数组和链表的方式实现的。
 
-hashmap的value可以为null，hashtable的value不能为null。
+hashmap的value可以为null，hashtable的key不能为null。
 
 如果你看我的[hashmap详解](https://wardseptember.github.io/notes/#/README)，hashtable还是比较简单的。
 
