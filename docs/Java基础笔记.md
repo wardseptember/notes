@@ -1211,7 +1211,116 @@ public final native void wait(long timeout) throws InterruptedException;
 protected void finalize() throws Throwable { }
 ```
 
+### Java String、StringBuffer 和 StringBuilder 的区别
 
+#### String
+
+**String**：字符串常量，字符串长度不可变。Java 中 String 是 immutable（不可变）的。
+
+String 类的包含如下定义：
+
+```
+/** The value is used for character storage. */
+private final char value[];
+
+/** The offset is the first index of the storage that is used. */
+private final int offset;
+
+/** The count is the number of characters in the String. */
+private final int count;
+```
+
+用于存放字符的数组被声明为 final 的，因此只能赋值一次，不可再更改。
+
+#### StringBuffer（JDK1.0）
+
+**StringBuffer**：字符串变量（Synchronized，即线程安全）。如果要频繁对字符串内容进行修改，出于效率考虑最好使用 StringBuffer，如果想转成 String 类型，可以调用 StringBuffer 的 toString() 方法。
+
+**Java.lang.StringBuffer** 线程安全的可变字符序列。在任意时间点上它都包含某种特定的字符序列，但通过某些方法调用可以改变该序列的长度和内容。可将字符串缓冲区安全地用于多个线程。
+
+**StringBuffer** 上的主要操作是 append 和 insert 方法，可重载这些方法，以接受任意类型的数据。每个方法都能有效地将给定的数据转换成字符串，然后将该字符串的字符追加或插入到字符串缓冲区中。
+
+- append 方法始终将这些字符添加到缓冲区的末端；
+- insert 方法则在指定的点添加字符。
+
+例如，如果 **z** 引用一个当前内容是 **start** 的字符串缓冲区对象，则此方法调用 **z.append("le")** 会使字符串缓冲区包含 **startle** ，而 **z.insert(4, "le")** 将更改字符串缓冲区，使之包含 **starlet** 。
+
+#### StringBuilder（JDK5.0）
+
+**StringBuilder**：字符串变量（非线程安全）。在内部，StringBuilder 对象被当作是一个包含字符序列的变长数组。
+
+java.lang.StringBuilder 是一个可变的字符序列，是 JDK5.0 新增的。此类提供一个与 StringBuffer 兼容的 API，但不保证同步。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候（这种情况很普遍）。
+
+其构造方法如下：
+
+| 构造方法                        | 描述                                                  |
+| ------------------------------- | ----------------------------------------------------- |
+| StringBuilder()                 | 创建一个容量为16的StringBuilder对象（16个空元素）     |
+| StringBuilder(CharSequence cs)  | 创建一个包含cs的StringBuilder对象，末尾附加16个空元素 |
+| StringBuilder(int initCapacity) | 创建一个容量为initCapacity的StringBuilder对象         |
+| StringBuilder(String s)         | 创建一个包含s的StringBuilder对象，末尾附加16个空元素  |
+
+在大部分情况下，**StringBuilder > StringBuffer**。这主要是由于前者不需要考虑线程安全。
+
+#### 三者区别
+
+String 类型和 StringBuffer 的主要性能区别：String 是不可变的对象, 因此在每次对 String 类型进行改变的时候，都会生成一个新的 String 对象，然后将指针指向新的 String 对象，所以经常改变内容的字符串最好不要用 String ，因为每次生成对象都会对系统性能产生影响，特别当内存中无引用对象多了以后， JVM 的 GC 就会开始工作，性能就会降低。
+
+使用 StringBuffer 类时，每次都会对 StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用。所以多数情况下推荐使用 StringBuffer ，特别是字符串对象经常改变的情况下。
+
+在某些特别情况下， String 对象的字符串拼接其实是被 Java Compiler 编译成了 StringBuffer 对象的拼接，所以这些时候 String 对象的速度并不会比 StringBuffer 对象慢，例如：
+
+```
+String s1 = “This is only a” + “ simple” + “ test”;
+StringBuffer Sb = new StringBuilder(“This is only a”).append(“ simple”).append(“ test”);
+```
+
+生成 String s1 对象的速度并不比 StringBuffer 慢。其实在 Java Compiler 里，自动做了如下转换：
+
+Java Compiler直接把上述第一条语句编译为：
+
+```
+String s1 = “This is only a simple test”;  
+```
+
+所以速度很快。但要注意的是，如果拼接的字符串来自另外的 String 对象的话，Java Compiler 就不会自动转换了，速度也就没那么快了，例如：
+
+```
+String s2 = “This is only a”;  
+String s3 = “ simple”;  
+String s4 = “ test”;  
+String s1 = s2 + s3 + s4;  
+```
+
+这时候，Java Compiler 会规规矩矩的按照原来的方式去做，String 的 concatenation（即+）操作利用了 StringBuilder（或StringBuffer）的append 方法实现，此时，对于上述情况，若 s2，s3，s4 采用 String 定义，拼接时需要额外创建一个 StringBuffer（或StringBuilder），之后将StringBuffer 转换为 String，若采用 StringBuffer（或StringBuilder），则不需额外创建 StringBuffer。
+
+#### 使用策略
+
+- （1）基本原则：如果要操作少量的数据，用String ；单线程操作大量数据，用StringBuilder ；多线程操作大量数据，用StringBuffer。
+
+- （2）不要使用String类的"+"来进行频繁的拼接，因为那样的性能极差的，应该使用StringBuffer或StringBuilder类，这在Java的优化上是一条比较重要的原则。例如：
+
+    ```
+    String result = "";
+    for (String s : hugeArray) {
+        result = result + s;
+    }
+    
+    // 使用StringBuilder
+    StringBuilder sb = new StringBuilder();
+    for (String s : hugeArray) {
+        sb.append(s);
+    }
+    String result = sb.toString();
+    ```
+
+    当出现上面的情况时，显然我们要采用第二种方法，因为第一种方法，每次循环都会**创建一个String result用于保存结果，除此之外二者基本相同（对于jdk1.5及之后版本）**。
+
+- （3）为了获得更好的性能，在构造 StringBuffer 或 StringBuilder 时应尽可能指定它们的容量。当然，如果你操作的字符串长度（length）不超过 16 个字符就不用了，当不指定容量（capacity）时默认构造一个容量为16的对象。不指定容量会显著降低性能。
+
+- （4）StringBuilder 一般使用在方法内部来完成类似 **+** 功能，因为是线程不安全的，所以用完以后可以丢弃。StringBuffer 主要用在全局变量中。
+
+- （5）相同情况下使用 StringBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。而在现实的模块化编程中，负责某一模块的程序员不一定能清晰地判断该模块是否会放入多线程的环境中运行，因此：除非确定系统的瓶颈是在 StringBuffer 上，并且确定你的模块不会运行在多线程模式下，才可以采用 StringBuilder；否则还是用 StringBuffer。
 
 ### 常用工具类
 
