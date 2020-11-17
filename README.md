@@ -50,7 +50,7 @@
 
 ### 操作系统
 
-* [操作系统基础](https://cyc2018.github.io/CS-Notes/#/notes/计算机操作系统%20-%20目录1)
+* [操作系统基础](http://www.cyc2018.xyz/计算机基础/操作系统基础/计算机操作系统%20-%20目录.html)
 * [内存管理](/docs/操作系统/内存管理.md)
 * [进程和线程](/docs/操作系统/进程和线程.md)
 * [进程间通信的方式](/docs/操作系统/进程间通信的方式.md)
@@ -59,16 +59,16 @@
 
 ### 数据库
 
-* [数据库系统原理](https://cyc2018.github.io/CS-Notes/#/notes/数据库系统原理)
-* [SQL](https://cyc2018.github.io/CS-Notes/#/notes/SQL)
-* [Mysql基础](https://cyc2018.github.io/CS-Notes/#/notes/MySQL)
+* [数据库系统原理](http://www.cyc2018.xyz/数据库/数据库系统原理.html)
+* [SQL](http://www.cyc2018.xyz/数据库/SQL%20语法.html)
+* [Mysql基础](http://www.cyc2018.xyz/数据库/MySQL.html)
 * [Mysql调优](/docs/Mysql/mysql调优笔记.md)
 
 ### 网络
 
-* [计算机网络](https://cyc2018.github.io/CS-Notes/#/notes/计算机网络%20-%20目录1)
+* [计算机网络](http://www.cyc2018.xyz/计算机基础/网络基础/计算机网络%20-%20目录.html)
 * [Socket](/docs/Socket.md)
-* [HTTP](https://cyc2018.github.io/CS-Notes/#/notes/HTTP)
+* [HTTP](/docs/计算机网络/HTTP.md)
 
 ### Nginx
 
