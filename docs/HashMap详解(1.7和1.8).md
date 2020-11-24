@@ -200,7 +200,7 @@ initHashSeedAsNeeded方法判断是否需要rehash
 
 `HashMap`结构图：
 
-![](http://wardseptember.club/FjO6pGCUZafcw5DGVmQnv0-kPrL5)
+![](http://wardseptember.top/FjO6pGCUZafcw5DGVmQnv0-kPrL5)
 
  HashMap：它根据键的hashCode值存储数据，大多数情况下可以直接定位到它的值，因而具有很快的访问速度，但遍历顺序却是不确定的。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null。HashMap非线程安全，即任一时刻可以有多个线程同时写HashMap，可能会导致数据的不一致。如果需要满足线程安全，可以用 Collections的synchronizedMap方法使HashMap具有线程安全的能力，或者使用ConcurrentHashMap。
 
@@ -232,7 +232,7 @@ return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
 
 [JDK 源码中 HashMap 的 hash 方法原理](https://link.jianshu.com/?t=https%3A%2F%2Fwww.zhihu.com%2Fquestion%2F20733617%2Fanswer%2F111577937)
 
-![](http://wardseptember.club/FviYD1i2KPPm7G3Ocar06b8y7gi5)
+![](http://wardseptember.top/FviYD1i2KPPm7G3Ocar06b8y7gi5)
 
 *hash函数的主要作用就是：增大随机性，减少碰撞。*
 
@@ -291,7 +291,7 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 如果n是默认大小16，没有扩容，`(n - 1) & hash`的计算结果就是hash值本身；见下图：
 
-![](http://wardseptember.club/FnoOXwzol6IFaNzkiZtRkKr5H32a)
+![](http://wardseptember.top/FnoOXwzol6IFaNzkiZtRkKr5H32a)
 
 如果n扩容，扩容大小是原大小*2，为什么n一定要是2的倍数？举个例子：
 
