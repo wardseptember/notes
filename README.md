@@ -43,6 +43,7 @@
 
 * [二叉树面试题刷题模板](/docs/LeetCode终极版/树.md)
 * [字符串面试题总结](/docs/LeetCode终极版/字符串.md)
+* [数组面试题总结](/docs/LeetCode终极版/数组.md)
 
 * [LeetCode题解](/docs/LeetCode/README.md)
 * [剑指Offer题解](/docs/剑指Offer/README.md)
