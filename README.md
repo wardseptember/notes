@@ -45,6 +45,7 @@
 * [字符串面试题总结](/docs/LeetCode终极版/字符串.md)
 * [数组面试题总结](/docs/LeetCode终极版/数组.md)
 * [链表面试题总结](/docs/LeetCode终极版/链表.md)
+* [栈和队列面试题总结](/docs/LeetCode终极版/栈和队列.md)
 
 * [LeetCode题解](/docs/LeetCode/README.md)
 * [剑指Offer题解](/docs/剑指Offer/README.md)
