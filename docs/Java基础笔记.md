@@ -2141,8 +2141,8 @@ Java语言的泛型实现方式是擦拭法（Type Erasure）。
 
 Java使用擦拭法实现泛型，导致了：
 
-- 编译器把类型``视为`Object`；
-- 编译器根据``实现安全的强制转型。
+- 编译器把类型`<T>`视为`Object`；
+- 编译器根据`<T>`实现安全的强制转型。
 
 使用泛型的时候，我们编写的代码也是编译器看到的代码：
 
@@ -2162,7 +2162,7 @@ String last = (String) p.getLast();
 
 所以，Java的泛型是由编译器在编译时实行的，编译器内部永远把所有类型`T`视为`Object`处理，但是，在需要转型的时候，编译器会根据`T`的类型自动为我们实行安全地强制转型。
 
-擦拭法决定了泛型``：
+擦拭法决定了泛型`<T>`：
 
 - 不能是基本类型，例如：`int`；
 - 不能获取带泛型类型的`Class`，例如：`Pair.class`；
@@ -2207,9 +2207,9 @@ class Pair<T> {
 }
 ```
 
-这样一来，给方法传入`Pair`类型时，它符合参数`Pair`类型。这种使用``的泛型定义称之为上界通配符（Upper Bounds Wildcards），即把泛型类型`T`的上界限定在`Number`了。
+这样一来，给方法传入`Pair<Integer>`类型时，它符合参数`Pair<? extends Number>`类型。这种使用`<? extends Number>`的泛型定义称之为上界通配符（Upper Bounds Wildcards），即把泛型类型`T`的上界限定在`Number`了。
 
-除了可以传入`Pair`类型，我们还可以传入`Pair`类型，`Pair`类型等等，因为`Double`和`BigDecimal`都是`Number`的子类。
+除了可以传入`Pair<Integer>`类型，我们还可以传入`Pair<Double>`类型，`Pair<BigDecimal>`类型等等，因为`Double`和`BigDecimal`都是`Number`的子类。
 
 使用类似``通配符作为方法参数时表示：
 
@@ -2218,7 +2218,7 @@ class Pair<T> {
 
 即一句话总结：使用`extends`通配符表示可以读，不能写。
 
-使用类似``定义泛型类时表示：
+使用类似`<T extends Number>`定义泛型类时表示：
 
 - 泛型类型限定为`Number`以及`Number`的子类。
 
@@ -2231,7 +2231,7 @@ void set(Pair<? super Integer> p, Integer first, Integer last) {
 }
 ```
 
-注意到`Pair`表示，方法参数接受所有泛型类型为`Integer`或`Integer`父类的`Pair`类型。
+注意到`Pair<? super Integer>`表示，方法参数接受所有泛型类型为`Integer`或`Integer`父类的`Pair`类型。
 
 使用``通配符表示：
 
@@ -2257,7 +2257,7 @@ void sample(Pair<?> p) {
 }
 ```
 
-因为``通配符既没有`extends`，也没有`super`，因此：
+因为`<?>`通配符既没有`extends`，也没有`super`，因此：
 
 - 不允许调用`set(T)`方法并传入引用（`null`除外）；
 - 不允许调用`T get()`方法并获取`T`引用（只能获取`Object`引用）。
