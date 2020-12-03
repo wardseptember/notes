@@ -893,3 +893,16 @@ public class EnsureCapacityTest {
 ```
 
 通过运行结果，我们可以看出向 ArrayList 添加大量元素之前最好先使用`ensureCapacity` 方法，以减少增量重新分配的次数。
+
+#### 推荐阅读
+
+- [机器学习资料汇总](https://mp.weixin.qq.com/s/3nOkk_Yt9D7Qp1WaWEjyZQ)
+- [吴恩达《机器学习》视频、作业、源码](https://mp.weixin.qq.com/s/dErZNtBYbVA7ItPm7T_HIw)
+- [106页《Python进阶》中文版正式发布](https://mp.weixin.qq.com/s/_WEuuxj-QgihijjLz7NJ9g)
+- [李航《统计学习方法》第二版完整课件](https://mp.weixin.qq.com/s/xah47OWuu8ahAUa1aFFo4Q)
+- [机器学习数学全书，1900页PDF下载](https://mp.weixin.qq.com/s/9BuyhdwuHiHH3ksVUe44ZQ)
+
+---
+
+<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/gzh.jpg" width="600"/> </div><br>
+
