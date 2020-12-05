@@ -23,6 +23,17 @@ static class  Segment<K,V> extends  ReentrantLock implements  Serializable {
 
 从上Segment的继承体系可以看出，Segment实现了ReentrantLock,也就带有锁的功能，当执行put操作时，会进行第一次key的hash来定位Segment的位置，如果该Segment还没有初始化，即通过CAS操作进行赋值，然后进行第二次hash操作，找到相应的HashEntry的位置，这里会利用继承过来的锁的特性，在将数据插入指定的HashEntry位置时（链表的尾端），会通过继承ReentrantLock的tryLock（）方法尝试去获取锁，如果获取成功就直接插入相应的位置，如果已经有线程获取该Segment的锁，那当前线程会以自旋的方式去继续的调用tryLock（）方法去获取锁，超过指定次数就挂起，等待唤醒。
 
+1. 首先对key进行第一次hash，通过hash值确定segment的位置
+
+2. 然后在segment内进行操作，获取锁
+
+3. 接着获取当前segment的HashEntry数组，然后对key进行第二次hash，通过hash值确定在HashEntry数组的索引位置。
+
+4. 然后对当前索引的HashEntry链进行遍历，如果有重复的key，则替换；如果没有重复的，则插入
+
+5. 关闭锁
+     可见，在整个put过程中，进行了2次hash操作，才最终确定key的位置。
+
 ## get操作
 
 ConcurrentHashMap的get操作跟HashMap类似，只是ConcurrentHashMap第一次需要经过一次hash定位到Segment的位置，然后再hash定位到指定的HashEntry，遍历该HashEntry下的链表进行对比，成功就返回，不成功就返回null。
