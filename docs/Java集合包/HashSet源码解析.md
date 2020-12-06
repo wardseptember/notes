@@ -10,6 +10,8 @@ HashSet 不是线程安全的， 如果多个线程尝试同时修改 HashSet，
 
 HashSet默认是一个容量为16，装载因子为0.75的集合，hashset的所有值就是hashmap的key，所有key的value都是统一个value.
 
+> hashset插入也可以是有序的，只要指定容量和装载因子就可以，这个构造方法用LinkedHashMap实现。不过这个构造方法没有修饰符修饰，他提供给子类LinkedHashSet使用的。
+
 * [HashMap源码解析](https://wardseptember.gitee.io/mynotes/#/docs/Java集合包/HashMap详解(1.7和1.8))
 
 <div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201206122548.png" width="600"/> </div><br>
