@@ -34,6 +34,7 @@
 * [ArrayList源码分析](/docs/Java集合包/ArrayList源码分析.md)
 * [LinkedList源码分析](/docs/Java集合包/LinkedList源码分析.md)
 * [Vector源码解析](/docs/Java集合包/Vector源码解析.md)
+* [Stack源码分析](/docs/Java集合包/Stack源码分析.md)
 * [PriorityQueue源码分析](/docs/Java集合包/PriorityQueue源码分析.md)
 * [ArrayQueue源码分析](/docs/Java集合包/ArrayQueue源码分析.md)
 * [HashMap源码详解(基于jdk1.8和1.7)](/docs/Java集合包/HashMap详解(1.7和1.8).md)
