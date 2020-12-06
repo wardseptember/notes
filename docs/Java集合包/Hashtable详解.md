@@ -8,13 +8,21 @@ hashtable默认大小为11，装填因子为0.75，也是基于数组和链表�
 
 hashmap的value可以为null，hashtable的key不能为null。
 
+HashTable是基于数组和链表实现的，存在hash冲突，就采用头插法，将新结点插入到链表的头部。
+
 如果你看我的[hashmap详解](https://wardseptember.github.io/notes/#/README)，hashtable还是比较简单的。
 
 多线程高并发教程也可以[我的笔记](https://wardseptember.github.io/notes/#/README)。
 
 > 本教程基于jdk 1.8。别的版本也不想看了，遗留类了，还有啥可看的。
 
-# put方法
+
+
+# 源码
+
+源码比较简单，加的全局锁，进行put的时候就不能get，进行get的时候就不能put，你想想效率低不低。
+
+## put方法
 
 ```java
     public synchronized V put(K key, V value) {
@@ -72,7 +80,7 @@ hashmap的value可以为null，hashtable的key不能为null。
 
 ### rehash
 
-rehash方法就是hashtable扩容的方法，也比较简单，直接把new 一个新的Entry，把原table里面的元素重新计算hash值，放到新的table里面。相比hashmap，效率低。
+rehash方法就是hashtable扩容的方法，也比较简单，直接把new 一个新的Entry数组，把原table里面的元素重新计算hash值，放到新的table里面。相比hashmap，效率低。
 
 ```java
     protected void rehash() {
@@ -106,7 +114,7 @@ rehash方法就是hashtable扩容的方法，也比较简单，直接把new 一�
     }
 ```
 
-# get方法
+## get方法
 
 直接取就完事了。
 
@@ -118,6 +126,35 @@ rehash方法就是hashtable扩容的方法，也比较简单，直接把new 一�
         for (Entry<?,?> e = tab[index] ; e != null ; e = e.next) {
             if ((e.hash == hash) && e.key.equals(key)) {
                 return (V)e.value;
+            }
+        }
+        return null;
+    }
+```
+
+## remove方法
+
+```java
+    public synchronized V remove(Object key) {
+        Entry<?,?> tab[] = table;
+        int hash = key.hashCode();
+        int index = (hash & 0x7FFFFFFF) % tab.length;
+        @SuppressWarnings("unchecked")
+        Entry<K,V> e = (Entry<K,V>)tab[index];
+        // prev是e的前驱结点，删除e，就设置prev.next = e.next
+        for(Entry<K,V> prev = null ; e != null ; prev = e, e = e.next) {
+            if ((e.hash == hash) && e.key.equals(key)) {
+                modCount++;
+                // prev =null 说明e是首结点
+                if (prev != null) {
+                    prev.next = e.next;
+                } else {
+                    tab[index] = e.next;
+                }
+                count--;
+                V oldValue = e.value;
+                e.value = null;
+                return oldValue;
             }
         }
         return null;
