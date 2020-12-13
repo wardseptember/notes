@@ -64,6 +64,7 @@
 * [链表面试题总结](/docs/LeetCode终极版/链表.md)
 * [栈和队列面试题总结](/docs/LeetCode终极版/栈和队列.md)
 * [二进制面试题总结](/docs/LeetCode终极版/二进制.md)
+* [哈希表面试题总结](/docs/LeetCode终极版/哈希表.md)
 * [LeetCode题解](/docs/LeetCode/README.md)
 * [剑指Offer题解](/docs/剑指Offer/README.md)
 
