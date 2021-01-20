@@ -72,6 +72,7 @@
 * [贪心算法面试题总结](/docs/LeetCode终极版/贪心算法.md)
 * [分治算法面试题总结](/docs/LeetCode终极版/分治算法.md)
 * [回溯算法面试题总结](/docs/LeetCode终极版/回溯算法.md)
+* [动态规划面试题总结](/docs/LeetCode终极版/动态规划.md)
 * [LeetCode题解](/docs/LeetCode/README.md)
 * [剑指Offer题解](/docs/剑指Offer/README.md)
 
