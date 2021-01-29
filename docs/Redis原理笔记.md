@@ -1,3 +1,93 @@
+# Redis五大基本类型
+
+redis 使用6.0.8版本
+
+* 命令区分大小写，key区分大小写
+* Help @命令
+
+## string
+
+* set key value
+* get key
+* mset key value key1 value1
+* mget key key1 
+* Incr key
+* Incrby key increment
+* Decr key
+* Decrby key decrement
+* Strlen key
+
+### 应用场景
+
+* 商品编号、订单号采用incr命令生成
+* 是否喜欢文章
+
+## list
+
+* Lpush key value value1 vlaue2
+* Rpush key value
+* Lrange key start stop
+* Llen key
+
+### 应用场景
+
+订阅的公众号的文章
+
+## hash
+
+hash ---> Map<String, Map<Object, Object>>
+
+* Hset key field vlaue
+* Hget key field
+* Hmset key field value key1 field1 value1
+* hmget key field 
+* hgetall key
+* hlen
+* Hdel
+
+### 应用场景
+
+购物车添加商品
+
+## set
+
+* Sadd key value1 value2
+* Srem key value1 value2          删除元素
+* Smembers key             获取集合中的所有元素
+* Sismember key member 判断元素是否在集合中
+* Scrad key      获取集合中元素的个数
+* srandmember key n      从集合中随机弹出n个元素，元素不删除
+* Spop key n     从集合中随机弹出n个元素，元素删除
+* 差集 sdiff key1 key2
+* 交集 sinter key1 key2
+* 并集 sunion key1 key2
+
+### 应用场景
+
+* 抽奖
+* 微博关注，共同关注
+* 微信朋友圈点赞
+* qq内推可能认识的人
+
+## zset
+
+向有序集合中加入一个元素和该元素的分数
+
+* Zadd key score member score1 member1
+* Zrange key start stop    按照元素分数从小到大排序，返回索引从start到stop之间的元素
+* Zscore key member 获取元素分数
+* Zrem key member 删除元素
+* Zrangebyscore key min max 获取指定分数范围的元素
+* Zincrby key increment member 增加某个元素的分数
+* Zcard key 获取集合中元素的数量
+* Zcout key min max 获取指定分数范围内的元素个数
+
+### 使用场景
+
+* 商品销售排行榜
+* 抖音热搜
+* 微博热搜
+
 # Redis持久化
 
 ## Redis的持久化是怎么实现的？
