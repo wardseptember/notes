@@ -250,7 +250,7 @@ class Solution {
 
 ```java
 class Solution {
-    int[][] move = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    int[][] move = {{1,0}, {-1, 0}, {0, 1}, {0, -1}};
     private int dfs(char[][] grid, boolean[][] visited, int x, int y, int count){
         if(x < 0 || x >= grid.length || y < 0 || y >= grid[0].length || grid[x][y] != '1' || visited[x][y])
             return count;
