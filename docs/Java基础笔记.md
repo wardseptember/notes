@@ -2175,8 +2175,6 @@ String last = (String) p.getLast();
 
 ## extends通配符
 
-
-
 ```java
 public class Main {  
 	public static void main(String[] args) {
@@ -2211,7 +2209,7 @@ class Pair<T> {
 
 除了可以传入`Pair<Integer>`类型，我们还可以传入`Pair<Double>`类型，`Pair<BigDecimal>`类型等等，因为`Double`和`BigDecimal`都是`Number`的子类。
 
-使用类似``通配符作为方法参数时表示：
+使用类似`Pair<? extends Number>`通配符作为方法参数时表示：
 
 - 方法内部可以调用获取`Number`引用的方法，例如：`Number n = obj.getFirst();`；
 - 方法内部无法调用传入`Number`引用的方法（`null`除外），例如：`obj.setFirst(Number n);`。
@@ -2233,14 +2231,14 @@ void set(Pair<? super Integer> p, Integer first, Integer last) {
 
 注意到`Pair<? super Integer>`表示，方法参数接受所有泛型类型为`Integer`或`Integer`父类的`Pair`类型。
 
-使用``通配符表示：
+使用`Pair<? super Integer>`通配符表示：
 
 - 允许调用`set(? super Integer)`方法传入`Integer`的引用；
 - 不允许调用`get()`方法获得`Integer`的引用。
 
 唯一例外是可以获取`Object`的引用：`Object o = p.getFirst()`。
 
-换句话说，使用``通配符作为方法参数，表示方法内部代码对于参数只能写，不能读。
+换句话说，使用` super`通配符作为方法参数，表示方法内部代码对于参数只能写，不能读。
 
 ### PESC原则
 
@@ -3002,5 +3000,3 @@ public class Singleton {
 > 定义一个操作中的算法的骨架，而将一些步骤延迟到子类中，使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
 
 模板方法（Template Method）是一个比较简单的模式。它的主要思想是，定义一个操作的一系列步骤，对于某些暂时确定不下来的步骤，就留给子类去实现好了，这样不同的子类就可以定义出不同的步骤。
-
-/docs/%E5%89%91%E6%8C%87Offer/%E9%9A%8F%E6%9C%BA%E5%88%B7%E9%A2%98(%E4%B8%89)%3Fid=%E5%89%91%E6%8C%87-offer-66-%E6%9E%84%E5%BB%BA%E4%B9%98%E7%A7%AF%E6%95%B0%E7%BB%84
