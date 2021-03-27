@@ -1,3 +1,5 @@
+[TOC]
+
 # 简介
 
 AQS是AbstractQueuedSynchronizer，是用来构建锁或者其它同步器组件的重量级基础框架及整个JUC体系的基石，通过内置的FIFO队列来完成资源获取线程的排队工作，并通过一个int类型变量表示持有锁的状态。
@@ -655,10 +657,8 @@ private void setHeadAndPropagate(Node node, int propagate) {
 
 至此，acquireShared()也要告一段落了。让我们再梳理一下它的流程：
 
-1. 
-
-2. 1. tryAcquireShared()尝试获取资源，成功则直接返回；
-    2. 失败则通过doAcquireShared()进入等待队列park()，直到被unpark()/interrupt()并成功获取到资源才返回。整个等待过程也是忽略中断的。
+1. tryAcquireShared()尝试获取资源，成功则直接返回；
+2. 失败则通过doAcquireShared()进入等待队列park()，直到被unpark()/interrupt()并成功获取到资源才返回。整个等待过程也是忽略中断的。
 
 　　其实跟acquire()的流程大同小异，只不过多了个**自己拿到资源后，还会去唤醒后继队友的操作（这才是共享嘛）**。
 

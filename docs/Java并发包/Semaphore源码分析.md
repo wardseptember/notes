@@ -4,7 +4,7 @@ Semaphore也是基于AQS实现的，用于限流，控制访问资源的线程�
 
 # 源码
 
-Semaphore有一个内部类sync继承了AbstractQueuedSynchronizer，通过更改state的值，控制对资源的访问，例如state=n，表示有n个线程可以同时访问某个资源，多出的线程只能等待别的线程释放锁，释放一次，state减一。
+Semaphore有一个内部类sync继承了AbstractQueuedSynchronizer，通过更改state的值，控制对资源的访问，例如state=n，表示有n个线程可以同时访问某个资源，多出的线程只能等待别的线程释放锁，释放一次，state加一。
 
 ## 内部类
 
