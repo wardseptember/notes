@@ -1,3 +1,5 @@
+* [Redis实现原理](https://www.cnblogs.com/ysocean/p/9102811.html#_label7)
+
 # Redis五大基本类型
 
 redis 使用6.0.8版本
@@ -87,6 +89,21 @@ hash ---> Map<String, Map<Object, Object>>
 * 商品销售排行榜
 * 抖音热搜
 * 微博热搜
+
+# Redis淘汰策略
+
+Redis 具体有 6 种淘汰策略：
+
+|      策略       |                         描述                         |
+| :-------------: | :--------------------------------------------------: |
+|  volatile-lru   | 从已设置过期时间的数据集中挑选最近最少使用的数据淘汰 |
+|  volatile-ttl   |   从已设置过期时间的数据集中挑选将要过期的数据淘汰   |
+| volatile-random |      从已设置过期时间的数据集中任意选择数据淘汰      |
+|   allkeys-lru   |       从所有数据集中挑选最近最少使用的数据淘汰       |
+| allkeys-random  |          从所有数据集中任意选择数据进行淘汰          |
+|   noeviction    |                     禁止驱逐数据                     |
+
+Redis 4.0 引入了 volatile-lfu 和 allkeys-lfu 淘汰策略，LFU 策略通过统计访问频率，将访问频率最少的键值对淘汰。
 
 # Redis持久化
 
