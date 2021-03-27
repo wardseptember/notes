@@ -894,6 +894,12 @@ public class EnsureCapacityTest {
 
 通过运行结果，我们可以看出向 ArrayList 添加大量元素之前最好先使用`ensureCapacity` 方法，以减少增量重新分配的次数。
 
+## 扩容总结
+
+* 如果是空数组，调用add方法，扩容大小就是10；如果不是空数组，调用add方法，minCapacity = size + 1，判断minCapacity是否大于数组容量，如果大于就进行扩容，调用grow方法，如果不大于就不需要扩容
+* grow方法，newCapacity = oldCapacity + (oldCapacity >> 1);如果newCapacity大于minCapacity，直接扩容成newCapacity，也就是原数组的大小的1.5倍左右；如果newCapacity小于minCapacity，就执行newCapacity=minCapacity，扩容成newCapacity。
+* 扩容之前还要检查newCapacity是否大于Integer.MAX_VALUE，如果大于，就执行newCapacity=Integer.MAX_VALUE;如果不大于不做改变。
+
 #### 推荐阅读
 
 - [机器学习资料汇总](https://mp.weixin.qq.com/s/3nOkk_Yt9D7Qp1WaWEjyZQ)

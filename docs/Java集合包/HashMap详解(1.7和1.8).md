@@ -287,11 +287,11 @@ key = null映射为索引0，查找table[0]中有没有key=null的结点
 
 ![](http://wardseptember.top/FjO6pGCUZafcw5DGVmQnv0-kPrL5)
 
- HashMap：它根据键的hashCode值存储数据，大多数情况下可以直接定位到它的值，因而具有很快的访问速度，但遍历顺序却是不确定的。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null。HashMap非线程安全，即任一时刻可以有多个线程同时写HashMap，可能会导致数据的不一致。如果需要满足线程安全，可以用 Collections的synchronizedMap方法使HashMap具有线程安全的能力，或者使用ConcurrentHashMap。
+HashMap：它根据键的hashCode值存储数据，大多数情况下可以直接定位到它的值，因而具有很快的访问速度，但遍历顺序却是不确定的。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null。HashMap非线程安全，即任一时刻可以有多个线程同时写HashMap，可能会导致数据的不一致。如果需要满足线程安全，可以用 Collections的synchronizedMap方法使HashMap具有线程安全的能力，或者使用ConcurrentHashMap。
 
 默认的初始容量是16
 默认的负载因子0.75
-当桶上的结点数大于8会转成红黑树
+当桶上的结点数大于等于8会转成红黑树
 当桶上的结点数小于6红黑树转链表
 Node<k,v>[] table //存储元素的哈希桶数组，总是2的幂次倍
 
@@ -1330,6 +1330,53 @@ HashMap每次扩容都是建立一个新的table数组，长度和容量阈值�
 ## 为什么不直接使用红黑树，而是链表长度大于8才专为红黑树
 
 因为红黑树占用空间是链表的两倍，而且当链表长度短时，红黑树不一定比链表快。
+
+## 多线程环境下，HashMap 1.8依然会出现死循环的情况
+
+多线程环境下，HashMap 1.8依然会出现死循环的情况，发生在向红黑树添加节点中。多跑几遍下面代码可以跑出死循环。
+
+```java
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ * jdk7 扩容时都可能导致死锁
+ * jdk8 在PutTreeValue时可能死循环   死循环在hashMap的1816行或2229行， java version "1.8.0_111"
+ * jstack发现可能卡在 at java.util.HashMap$TreeNode.balanceInsertion(HashMap.java:2229)
+ * 也有可能卡在  at java.util.HashMap$TreeNode.root(HashMap.java:1816)
+ *
+ * @since 2019-02-23
+ */
+public class HashMap1 {
+
+    public static void main(String[] args) {
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(1);
+        for (int i = 0; i < 200; i++) {
+            new HashMapThread(map).start();
+        }
+    }
+}
+
+class HashMapThread extends Thread {
+    private static AtomicInteger ai = new AtomicInteger(0);
+    private HashMap<Integer, Integer> map;
+
+    HashMapThread(HashMap<Integer, Integer> map) {
+        this.map = map;
+    }
+
+    @Override
+    public void run() {
+        while (ai.get() < 100000) {
+            map.put(ai.get(), ai.get());
+            ai.incrementAndGet();
+        }
+        System.out.println(Thread.currentThread().getName() + "执行结束完");
+    }
+}
+```
 
 ### 参考链接
 
