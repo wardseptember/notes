@@ -1,4 +1,5 @@
 <!-- GFM-TOC -->
+
 * [一 、基础概念](#一-基础概念)
     * [URI](#uri)
     * [请求和响应报文](#请求和响应报文)
@@ -728,6 +729,8 @@ SSL/TLS 协议基本流程：
 - 双方采用「会话秘钥」进行加密通信。
 
 前两步也就是 SSL/TLS 的建立过程，也就是握手阶段。
+
+<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210203221735.png" width="600"/> </div><br>
 
 SSL/TLS 的「握手阶段」涉及**四次**通信，可见下图：
 

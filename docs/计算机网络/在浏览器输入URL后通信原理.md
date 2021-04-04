@@ -6,7 +6,7 @@
 
 **地址解析：**
 
-首**先**判断你输入的是一个合法的 URL 还是一个待搜索的关键词，并且根据你输入的内容进行自动完成、字符编码等操作。
+首先判断你输入的是一个合法的 URL 还是一个待搜索的关键词，并且根据你输入的内容进行自动完成、字符编码等操作。
 
 ![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017194058.png)
 
@@ -185,6 +185,8 @@ TCP 模块在执行连接、收发、断开等各阶段操作时，都需要委�
 这个时候就需要根据**路由表**规则，来判断哪一个网卡作为源地址 IP。
 
 在 Linux 操作系统，我们可以使用 `route -n` 命令查看当前系统的路由表。
+
+目标ip与子网掩码做与运算，如果运算结果等于Destination，就说明匹配到了，将数据发送到gateway，gateway的值就是路由器的IP。
 
 ![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017204301.png)
 
