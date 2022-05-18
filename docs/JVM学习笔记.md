@@ -10,11 +10,11 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 
 JDK 1.8之前：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FpJKe1Oj5-IsogbkudF_Elk6TcTM)
+![](../imgs/FpJKe1Oj5-IsogbkudF_Elk6TcTM)
 
 JDK 1.8之后：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FjY2BjT7WR4ElQIrXmjcHLnpQ-xQ)
+![](../imgs/FjY2BjT7WR4ElQIrXmjcHLnpQ-xQ)
 
 线程私有的：程序计数器、虚拟机栈、本地方法栈
 
@@ -81,11 +81,11 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作**GC 堆（G
 
 * 永生代(Permanent Generation)
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FjBkP_GawX08HbwWJumNxi32bh-N)
+![](../imgs/FjBkP_GawX08HbwWJumNxi32bh-N)
 
 JDK 8 版本之后方法区（HotSpot 的永久代）被彻底移除了（JDK1.7 就已经开始了），取而代之是元空间，元空间使用的是直接内存。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Fnpe0SEzyHeX0I4cx540FWpLBthR)
+![](../imgs/Fnpe0SEzyHeX0I4cx540FWpLBthR)
 
 **上图所示的 Eden 区、两个 Survivor 区都属于新生代（为了区分，这两个 Survivor 区域按照顺序被命名为 s1 和 s2），中间一层属于老年代。**
 
@@ -150,7 +150,7 @@ JDK 1.8之后使用元空间（存放在内存里）替代永久代，为什么�
 
 **JDK1.7 及之后版本的 JVM 已经将字符串常量池从方法区中移了出来，在 Java 堆（Heap）中开辟了一块区域存放字符串常量池。**但是运行时常量池的其他内容还在方法区，也就是在元空间里面。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FrgBFXSOSaXbdVc_DkRBSeGmCmoW)
+![](../imgs/FrgBFXSOSaXbdVc_DkRBSeGmCmoW)
 
 ### 直接内存
 
@@ -166,7 +166,7 @@ JDK1.4 中新加入的 **NIO(New Input/Output) 类**，引入了一种基于**�
 
 通过上面的介绍我们大概知道了虚拟机的内存情况，下面我们来详细的了解一下 HotSpot 虚拟机在 Java 堆中对象分配、布局和访问的全过程。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Fo0HXIrJtpUVKi0Oi3kQYebs6d9c)
+![](../imgs/Fo0HXIrJtpUVKi0Oi3kQYebs6d9c)
 
 #### Step1:类加载检查
 
@@ -180,7 +180,7 @@ JDK1.4 中新加入的 **NIO(New Input/Output) 类**，引入了一种基于**�
 
 选择以上两种方式中的哪一种，取决于 Java 堆内存是否规整。而 Java 堆内存是否规整，取决于 GC 收集器的算法是"标记-清除"，还是"标记-整理"（也称作"标记-压缩"），值得注意的是，复制算法内存也是规整的。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FgWuHlpLx3om_5Z3wfwDATlMhuDK)
+![](../imgs/FgWuHlpLx3om_5Z3wfwDATlMhuDK)
 
 **内存分配并发问题**
 
@@ -217,7 +217,7 @@ JDK1.4 中新加入的 **NIO(New Input/Output) 类**，引入了一种基于**�
 
 在32位的HotSpot虚拟机中，Mark Word存储内容如下:
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Fg-dwM3e2MBTKS1D4-80y-gk0nA8)
+![](../imgs/Fg-dwM3e2MBTKS1D4-80y-gk0nA8)
 
 如：在对象未被锁时，Mark Word的25bit存储对象的hashcode，4bit存储分代年龄，1bit表示是否偏向锁，2bit用于存储锁标志位。**不用的锁状态用不同的锁标志位表示。**
 
@@ -245,11 +245,11 @@ HotSpot虚拟机默认的分配顺序为longs/doubles、ints、shorts/chars、by
 
 **句柄：** 如果使用句柄的话，那么 Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息；
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FsiwvYohav8Wl85mGSrBlGE_th7S)
+![](../imgs/FsiwvYohav8Wl85mGSrBlGE_th7S)
 
 **直接指针：** 如果使用直接指针访问，那么 Java 堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而 reference 中存储的直接就是对象的地址。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FhGoKq14OCho8xrKRR_YwDunPCGt)
+![](../imgs/FhGoKq14OCho8xrKRR_YwDunPCGt)
 
 **这两种对象访问方式各有优势。使用句柄来访问的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要修改。使用直接指针访问方式最大的好处就是速度快，它节省了一次指针定位的时间开销。**
 
@@ -304,7 +304,7 @@ System.out.println(str3 == str5);//true
 System.out.println(str4 == str5);//false
 ```
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FnnTY_OuVcaBLRQ10ZVjDD4JJMmh)
+![](../imgs/FnnTY_OuVcaBLRQ10ZVjDD4JJMmh)
 
 尽量避免多个字符串拼接，因为这样会重新创建对象。如果需要改变字符串的话，可以使用 StringBuilder 或者 StringBuffer。
 
@@ -439,7 +439,7 @@ System.out.println("40=i5+i6   " + (40 == i5 + i6)); // true
 
 ## 导论
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Fmeb6mftyN2qRY81Dr22IDcYimRf)
+![](../imgs/Fmeb6mftyN2qRY81Dr22IDcYimRf)
 
 当需要排查各种内存溢出问题、当垃圾收集成为系统达到更高并发的瓶颈时，我们就需要对这些“自动化”的技术实施必要的监控和调节。
 
@@ -465,7 +465,7 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作**GC 堆（G
 
 **堆空间的基本结构：**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FjaEIQYLzU19RKIG_MKpbJINrtTB)
+![](../imgs/FjaEIQYLzU19RKIG_MKpbJINrtTB)
 
 上图所示的 eden 区、s0("From") 区、s1("To") 区都属于新生代，tentired 区属于老年代。大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s1("To")，并且对象的年龄还会加 1(Eden 区->Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 `-XX:MaxTenuringThreshold` 来设置。经过这次GC后，Eden区和"From"区已经被清空。这个时候，"From"和"To"会交换他们的角色，也就是新的"To"就是上次GC前的“From”，新的"From"就是上次GC前的"To"。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，"To"区被填满之后，会将所有对象移动到老年代中。
 
@@ -538,7 +538,7 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作**GC 堆（G
 
 堆中几乎放着所有的对象实例，对堆垃圾回收前的第一步就是要判断那些对象已经死亡（即不能再被任何途径使用的对象）。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FpU3CdUgoDPlONFE8oxy3POz_WCX)
+![](../imgs/FpU3CdUgoDPlONFE8oxy3POz_WCX)
 
 下面介绍判断一个对象是否死亡的两种方法。
 
@@ -567,7 +567,7 @@ public class ReferenceCountingGc {
 
 这个算法的基本思想就是通过一系列的称为 **“GC Roots”** 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FhecqywgkomeiqDXJeJNxZOTRtWE)
+![](../imgs/FhecqywgkomeiqDXJeJNxZOTRtWE)
 
 #### GC Roots
 
@@ -764,7 +764,7 @@ public class PhantomReferenceDemo {
 
 对象太多，堆溢出。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200923141237.png)
+![](../imgs/20200923141237.png)
 
 ### Java.lang.OutOfMemoryError: GC overhead limit exceeded
 
@@ -811,13 +811,13 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 * 执行效率不稳定。如果Java堆中包含大量需要被回收的对象，这是必须进行大量的标记和清除动作，导致回收效率降低。
 * 内存空间碎片化。标记、清除之后会产生大量不连续的内存碎片，空间碎片太多可能会导致当以后程序运行过程中需要分配较大对象时无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FgqA2lgvgK9eHQQcDVeWaeyke-BD)
+![](../imgs/FgqA2lgvgK9eHQQcDVeWaeyke-BD)
 
 ### 标记-复制算法
 
 为了解决标记-清除算法中的效率问题，“复制”收集算法出现了。它可以将内存分为大小相同的两块，每次使用其中的一块。当这一块的内存使用完后，就将还存活的对象复制到另一块去，然后再把使用的空间一次清理掉。这样就使每次的内存回收都是对内存区间的一半进行回收。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FrewWCsCtIgaIZQaCcnlyQsxJuWd)
+![](../imgs/FrewWCsCtIgaIZQaCcnlyQsxJuWd)
 
 缺点：
 
@@ -828,7 +828,7 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 
 根据老年代的特点提出的一种标记算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象回收，而是让所有存活的对象向一端移动，然后直接清理掉端边界以外的内存。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FgsFWO2GkAGoSR_gsiECEez0Rtou)
+![](../imgs/FgsFWO2GkAGoSR_gsiECEez0Rtou)
 
 缺点：
 
@@ -840,7 +840,7 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 
 ## 经典垃圾收集器
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Fmz83KfQnA5DUuyPiPBT50WPRXyA)
+![](../imgs/Fmz83KfQnA5DUuyPiPBT50WPRXyA)
 
 以上是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用；图中收集器所处的区域，则表示它是属于新生代收集器或者是老年代收集器。
 
@@ -849,7 +849,7 @@ Metaspace是方法区在HotSpot中的实现，使用的是本地内存，主要�
 
 ### Serial 收集器
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FkCjVVenZXClApirFOkIDPE_e0j5)
+![](../imgs/FkCjVVenZXClApirFOkIDPE_e0j5)
 
 Serial（串行）收集器收集器是最基本、历史最悠久的垃圾收集器了。大家看名字就知道这个收集器是一个单线程收集器了。它的 **“单线程”** 的意义不仅仅意味着它只会使用一条垃圾收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集工作的时候必须暂停其他所有的工作线程（ **"Stop The World"** ），直到它收集结束。
 
@@ -861,7 +861,7 @@ Serial（串行）收集器收集器是最基本、历史最悠久的垃圾收�
 
 ### ParNew 收集器
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FpIifXxYw5uZGrS-9fiwLCF_dvRL)
+![](../imgs/FpIifXxYw5uZGrS-9fiwLCF_dvRL)
 
 它是 Serial 收集器的多线程版本。
 
@@ -919,7 +919,7 @@ Serial Old收集器是**Serial 收集器的老年代版本**，它同样是一�
 - **重新标记：** 重新标记阶段就是为了修正并发标记期间因为用户程序继续运行而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段的时间稍长，远远比并发标记阶段时间短
 - **并发清除：** 开启用户线程，同时 GC 线程开始对未标记的区域做清扫
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200802151619.png)
+![](../imgs/20200802151619.png)
 
 从它的名字就可以看出它是一款优秀的垃圾收集器，主要优点：**并发收集、低停顿**。但是它有下面三个明显的缺点：
 
@@ -936,7 +936,7 @@ Serial Old收集器是**Serial 收集器的老年代版本**，它同样是一�
 
 G1 把堆划分成多个大小相等的独立区域（Region），新生代和老年代不再物理隔离。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200802162959.png)
+![](../imgs/20200802162959.png)
 
 
 
@@ -944,7 +944,7 @@ G1 把堆划分成多个大小相等的独立区域（Region），新生代和�
 
 每个 Region 都有一个 Remembered Set，用来记录该 Region 对象的引用对象所在的 Region。通过使用 Remembered Set，在做可达性分析的时候就可以避免全堆扫描。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200802163142.png)
+![](../imgs/20200802163142.png)
 
 
 
@@ -1050,7 +1050,7 @@ java -XX:+UseG1GC
     -XX:+ParNewGC
     ```
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200923162959.png)
+![](../imgs/20200923162959.png)
 
 ## 低延迟垃圾收集器
 
@@ -1182,7 +1182,7 @@ java -XX:+PrintFlagsInitial
 java -XX:PrintFlagsFinal
 ```
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200922221945.png)
+![](../imgs/20200922221945.png)
 
 > ":= "代表UseParallelGC被修改过，没有被修改就是“=”
 
@@ -1218,11 +1218,11 @@ java -XX:+PrintCommandLineFlags -version
 
 #### Minor GC
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200922230529.png)
+![](../imgs/20200922230529.png)
 
 #### Full GC
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200922230942.png)
+![](../imgs/20200922230942.png)
 
 ### 设置参数案例
 
@@ -1265,7 +1265,7 @@ jvm默认新生代参数：
 
 Clojure（Lisp 语言的一种方言）、Groovy、Scala 等语言都是运行在 Java 虚拟机之上。下图展示了不同的语言被不同的编译器编译成`.class`文件最终运行在 Java 虚拟机之上。`.class`文件的二进制格式可以使用 [WinHex](https://www.x-ways.net/winhex/) 查看。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818163307.png)
+![](../imgs/20200818163307.png)
 
 **可以说`.class`文件是不同的语言在 Java 虚拟机之间的重要桥梁，同时也是支持 Java 跨平台很重要的一个原因。**
 
@@ -1298,7 +1298,7 @@ ClassFile {
 
 **Class文件字节码结构组织示意图** （之前在网上保存的，非常不错，原出处不明）：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818163508.png)
+![](../imgs/20200818163508.png)
 
 ### 2.1 魔数
 
@@ -1363,7 +1363,7 @@ ClassFile {
 
 类访问和属性修饰符:
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818164402.png)
+![](../imgs/20200818164402.png)
 
 我们定义了一个 Employee 类
 
@@ -1376,7 +1376,7 @@ public class Employee {
 
 通过`javap -v class类名` 指令来看一下类的访问标志。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818164421.png)
+![](../imgs/20200818164421.png)
 
 ### 2.5 当前类索引,父类索引与接口索引集合
 
@@ -1402,7 +1402,7 @@ public class Employee {
 
 **field info(字段表) 的结构:**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818165909.png)
+![](../imgs/20200818165909.png)
 
 - **access_flags:** 字段的作用域（`public` ,`private`,`protected`修饰符），是实例变量还是类变量（`static`修饰符）,可否被序列化（transient 修饰符）,可变性（final）,可见性（volatile 修饰符，是否强制从主内存读写）。
 - **name_index:** 对常量池的引用，表示的字段的名称；
@@ -1414,7 +1414,7 @@ public class Employee {
 
 **字段的 access_flags 的取值:**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818165931.png)
+![](../imgs/20200818165931.png)
 
 ### 2.7 方法表集合
 
@@ -1429,11 +1429,11 @@ Class 文件存储格式中对方法的描述与对字段的描述几乎采用�
 
 **method_info(方法表的) 结构:**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818170006.png)
+![](../imgs/20200818170006.png)
 
 **方法表的 access_flag 取值：**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818170028.png)
+![](../imgs/20200818170028.png)
 
 注意：因为`volatile`修饰符和`transient`修饰符不可以修饰方法，所以方法表的访问标志中没有这两个对应的标志，但是增加了`synchronized`、`native`、`abstract`等关键字修饰方法，所以也就多了这些关键字对应的标志。
 
@@ -1456,7 +1456,7 @@ Class 文件存储格式中对方法的描述与对字段的描述几乎采用�
 
 一个类的完整生命周期如下：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818171655.png)
+![](../imgs/20200818171655.png)
 
 ## 类加载过程
 
@@ -1464,7 +1464,7 @@ Class 文件需要加载到虚拟机中之后才能运行和使用，那么虚�
 
 系统加载 Class 类型的文件主要三步:**加载->连接->初始化**。连接过程又可分为三步:**验证->准备->解析**。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818171716.png)
+![](../imgs/20200818171716.png)
 
 ### 加载
 
@@ -1484,7 +1484,7 @@ Class 文件需要加载到虚拟机中之后才能运行和使用，那么虚�
 
 ### 验证
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818171749.png)
+![](../imgs/20200818171749.png)
 
 ### 准备
 
@@ -1495,7 +1495,7 @@ Class 文件需要加载到虚拟机中之后才能运行和使用，那么虚�
 
 **基本数据类型的零值：**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818171813.png)
+![](../imgs/20200818171813.png)
 
 ### 解析
 
@@ -1580,7 +1580,7 @@ JVM 中内置了三个重要的 ClassLoader，除了 BootstrapClassLoader 其他
 
 每一个类都有一个对应它的类加载器。系统中的 ClassLoder 在协同工作的时候会默认使用 **双亲委派模型** 。即在类加载的时候，系统会首先判断当前类是否被加载过。已经被加载的类会直接返回，否则才会尝试加载。加载的时候，首先会把该请求委派该父类加载器的 `loadClass()` 处理，因此所有的请求最终都应该传送到顶层的启动类加载器 `BootstrapClassLoader` 中。当父类加载器无法处理时，才由自己来处理。当父类加载器为null时，会使用启动类加载器 `BootstrapClassLoader` 作为父类加载器。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200818174711.png)
+![](../imgs/20200818174711.png)
 
 每个类加载都有一个父类加载器，我们通过下面的程序来验证。
 
@@ -1721,7 +1721,7 @@ protected Class<?> loadClass(String name, boolean resolve)
 
     常用操作的响应时间列表：
 
-    <div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204140230.png" width="500"/> </div><br>
+    <div align="center"> <img src="../imgs/20210204140230.png" width="500"/> </div><br>
 
     在垃圾回收环节中：
 
@@ -1755,7 +1755,7 @@ Jps [options] [hostid]
 
 options参数如下图：
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204141932.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204141932.png" width="600"/> </div><br>
 
 ### jstat
 
@@ -1767,9 +1767,9 @@ jstat(JVM Statistics Monitoring  Tool)查看JVM统计信息
 
 Jstat -h 查看命令相关参数
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204155936.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204155936.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204160441.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204160441.png" width="600"/> </div><br>
 
 
 
@@ -1781,7 +1781,7 @@ Jstat -h 查看命令相关参数
 
 #### 判断内存泄露
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204160904.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204160904.png" width="600"/> </div><br>
 
 ### jinfo
 
@@ -1791,9 +1791,9 @@ Jinfo(Configuration Info for Java) 查看虚拟机配置参数信息，也可用
 
 Jinfo [options] pid
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204161820.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204161820.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204162226.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204162226.png" width="600"/> </div><br>
 
 
 
@@ -1801,19 +1801,19 @@ Jinfo [options] pid
 
 Jmap(JVM Memory Map)：一方面是获取dump文件（堆转储快照文件，二进制文件），它还可以获取目标Java进程的内存相关信息，包括Java堆各区域的使用情况、堆中对象的统计信息、类加载信息等。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204164401.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204164401.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204164546.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204164546.png" width="600"/> </div><br>
 
 #### 
 
 #### 导出内存映像文件
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204164911.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204164911.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204165015.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204165015.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204165612.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204165612.png" width="600"/> </div><br>
 
 
 
@@ -1824,27 +1824,27 @@ Jmap(JVM Memory Map)：一方面是获取dump文件（堆转储快照文件，�
 * Jmap -permstat pid 查看系统的ClassLoader信息
 * Jmap -finalizerinfo 查看堆积在finalizer队列中的对象
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204221856.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204221856.png" width="600"/> </div><br>
 
 ### jat
 
 Jhat(JVM Heap Analysis Tool)是JDK自带的堆分析工具
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204222100.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204222100.png" width="600"/> </div><br>
 
 #### 基本语法
 
 jhat [option] [dumpfile]
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204222640.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204222640.png" width="600"/> </div><br>
 
 ### Jstack(JVM Stack Trace)
 
 Jstack：用于生成虚拟机指定进程当前时刻的线程快照（虚拟机堆栈跟踪）。线程快照就是当前虚拟机内指定进程的每一条线程正在执行的方法堆栈的集合。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204223116.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204223116.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204223650.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204223650.png" width="600"/> </div><br>
 
 
 
@@ -1852,289 +1852,289 @@ Jstack：用于生成虚拟机指定进程当前时刻的线程快照（虚拟�
 
 ### jcmd
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204224114.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204224114.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204224259.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204224259.png" width="600"/> </div><br>
 
 ### jstatd
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204224820.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204224820.png" width="600"/> </div><br>
 
 ## 图形化工具
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204225101.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204225101.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204225255.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204225255.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204225450.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204225450.png" width="600"/> </div><br>
 
 ### Jconsole
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204225614.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204225614.png" width="600"/> </div><br>
 
 
 
 ### Visual VM
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204230331.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204230331.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204230622.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204230622.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204231200.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204231200.png" width="600"/> </div><br>
 
 主要功能
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210204231253.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210204231253.png" width="600"/> </div><br>
 
 ### MAT
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210205102345.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210205102345.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210205102556.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210205102556.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210205105844.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210205105844.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210205111556.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210205111556.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210205111806.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210205111806.png" width="600"/> </div><br>
 
 ### tomcat
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210205112716.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210205112716.png" width="600"/> </div><br>
 
 ### JProfile
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206094825.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206094825.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206095033.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206095033.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206095528.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206095528.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206100408.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206100408.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206103633.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206103633.png" width="600"/> </div><br>
 
 ### Arthas
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206104509.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206104509.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206104637.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206104637.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206104758.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206104758.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206104918.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206104918.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206105534.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206105534.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206105638.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206105638.png" width="600"/> </div><br>
 
 #### 命令
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206105813.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206105813.png" width="600"/> </div><br>
 
 * [官网教程](https://arthas.aliyun.com/doc/arthas-tutorials.html?language=cn)
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206111912.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206111912.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206113352.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206113352.png" width="600"/> </div><br>
 
 ### Java Mission Control
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206115138.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206115138.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206115338.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206115338.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206120738.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206120738.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206120822.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206120822.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206120938.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206120938.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206121005.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206121005.png" width="600"/> </div><br>
 
 ### Flame Graphs
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206121210.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206121210.png" width="600"/> </div><br>
 
 ### Tprofiler
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206121445.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206121445.png" width="600"/> </div><br>
 
 
 
 ## 内存泄露
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206085545.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206085545.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206085935.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206085935.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206090044.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206090044.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206090243.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206090243.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206090352.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206090352.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206090542.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206090542.png" width="600"/> </div><br>
 
 
 
 ### 静态集合类
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206091434.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206091434.png" width="600"/> </div><br>
 
 ### 单例模式
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206091538.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206091538.png" width="600"/> </div><br>
 
 
 
 ### 内部类持有外部类
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206091718.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206091718.png" width="600"/> </div><br>
 
 ### 各种连接
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206091826.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206091826.png" width="600"/> </div><br>
 
 ### 变量不合理的作用域
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206091949.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206091949.png" width="600"/> </div><br>
 
 ### 改变哈希值
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206092258.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206092258.png" width="600"/> </div><br>
 
 
 
 ### 缓存泄漏
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206093053.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206093053.png" width="600"/> </div><br>
 
 ### 监听器和回调
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206093340.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206093340.png" width="600"/> </div><br>
 
 ## JVM运行时参数
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206122007.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206122007.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206122210.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206122210.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206122330.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206122330.png" width="600"/> </div><br>
 
  
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206122520.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206122520.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206123728.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206123728.png" width="600"/> </div><br>
 
 `java -X`
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206123919.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206123919.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206124203.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206124203.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206125035.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206125035.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206125554.png" width="600"/> </div><br>
-
-
-
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206125943.png" width="600"/> </div>
-
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206130236.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206125554.png" width="600"/> </div><br>
 
 
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206134700.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206125943.png" width="600"/> </div>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206151553.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206130236.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206151632.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206151739.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206152519.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206134700.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206152706.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206151553.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206155016.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206151632.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206155117.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206151739.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206155301.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206152519.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206155447.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206152706.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206155636.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206155016.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206155945.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206155117.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206160019.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206155301.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206160059.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206155447.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206160119.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206155636.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206160215.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206155945.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206165841.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206160019.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206170000.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206160059.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206170403.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206160119.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206174112.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206160215.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206174505.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206165841.png" width="600"/> </div><br>
+
+<div align="center"> <img src="../imgs/20210206170000.png" width="600"/> </div><br>
+
+<div align="center"> <img src="../imgs/20210206170403.png" width="600"/> </div><br>
+
+<div align="center"> <img src="../imgs/20210206174112.png" width="600"/> </div><br>
+
+<div align="center"> <img src="../imgs/20210206174505.png" width="600"/> </div><br>
 
 ## 分析日志
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206175111.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206175111.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206175528.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206175528.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206175604.png"/> </div><br>
+<div align="center"> <img src="../imgs/20210206175604.png"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206175724.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206175724.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206175825.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206175825.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206175858.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206175858.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206175927.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206175927.png" width="600"/> </div><br>
 
 ### Minor GC日志解析
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206180117.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206180117.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206180146.png" /> </div><br>
+<div align="center"> <img src="../imgs/20210206180146.png" /> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206180352.png" /> </div><br>
+<div align="center"> <img src="../imgs/20210206180352.png" /> </div><br>
 
 ### Full GC日志分析
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206181546.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206181546.png" width="600"/> </div><br>
 
 
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206181434.png" /> </div><br>
+<div align="center"> <img src="../imgs/20210206181434.png" /> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206181840.png" /> </div><br>
+<div align="center"> <img src="../imgs/20210206181840.png" /> </div><br>
 
 ### GC Easy
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206182018.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206182018.png" width="600"/> </div><br>
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206182329.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206182329.png" width="600"/> </div><br>
 
 ### GCViewer
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206182912.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206182912.png" width="600"/> </div><br>
 
 ## 性能优化
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210206184732.png" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/20210206184732.png" width="600"/> </div><br>
 
 
 
