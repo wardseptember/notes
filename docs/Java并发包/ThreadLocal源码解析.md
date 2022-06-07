@@ -19,13 +19,13 @@ ThreadLocal采用“以空间换时间”的方式，为每一个线程都提供
 
 Thread、ThreadLocal、ThreadLocalMap、Entry之间的关系：
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201207173804.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201207173804.png" width="600"/> </div><br>
 
 上图中描述了：一个Thread中只有一个ThreadLocalMap，一个ThreadLocalMap中可以有多个ThreadLocal对象，其中一个ThreadLocal对象对应一个ThreadLocalMap中一个的Entry（也就是说：一个Thread可以依附有多个ThreadLocal对象）。
 
 在ThreadLocal的生命周期中，都存在这些引用。看下图: **实线代表强引用，虚线代表弱引用。**
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201207174041.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201207174041.png" width="600"/> </div><br>
 
 2、ThreadLocal的实现是这样的：每个Thread 维护一个 `ThreadLocalMap` 映射表，这个映射表的 key 是 `ThreadLocal`实例本身，value 是真正需要存储的 Object。
 

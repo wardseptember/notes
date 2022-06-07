@@ -285,7 +285,7 @@ key = null映射为索引0，查找table[0]中有没有key=null的结点
 
 `HashMap`结构图：
 
-![](http://wardseptember.top/FjO6pGCUZafcw5DGVmQnv0-kPrL5)
+![](../../imgs/FjO6pGCUZafcw5DGVmQnv0-kPrL5)
 
 HashMap：它根据键的hashCode值存储数据，大多数情况下可以直接定位到它的值，因而具有很快的访问速度，但遍历顺序却是不确定的。 HashMap最多只允许一条记录的键为null，允许多条记录的值为null。HashMap非线程安全，即任一时刻可以有多个线程同时写HashMap，可能会导致数据的不一致。如果需要满足线程安全，可以用 Collections的synchronizedMap方法使HashMap具有线程安全的能力，或者使用ConcurrentHashMap。
 
@@ -1089,7 +1089,7 @@ static final int hash(Object key) {
 
 [JDK 源码中 HashMap 的 hash 方法原理](https://link.jianshu.com/?t=https%3A%2F%2Fwww.zhihu.com%2Fquestion%2F20733617%2Fanswer%2F111577937)
 
-![](http://wardseptember.top/FviYD1i2KPPm7G3Ocar06b8y7gi5)
+![](../../imgs/FviYD1i2KPPm7G3Ocar06b8y7gi5)
 
 *hash函数的主要作用就是：增大随机性，减少碰撞。*
 
@@ -1167,7 +1167,7 @@ hashmap中put的源码:
 
 如果n是默认大小16，没有扩容，`(n - 1) & hash`的计算结果就是hash值本身；见下图：
 
-![](http://wardseptember.top/FnoOXwzol6IFaNzkiZtRkKr5H32a)
+![](../../imgs/FnoOXwzol6IFaNzkiZtRkKr5H32a)
 
 如果n扩容，扩容大小是原大小*2，为什么n一定要是2的倍数？举个例子：
 
@@ -1195,7 +1195,7 @@ e2.hash & newCap-1
 
 当桶上的结点数大于8会转成红黑树：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FilCh0t268Fot12pqsnGGsw3YVG-)
+![](../../imgs/FilCh0t268Fot12pqsnGGsw3YVG-)
 
 红黑树的查找速度更快，查找速度优化为O(logn)。
 
@@ -1388,5 +1388,4 @@ class HashMapThread extends Thread {
 ---
 **欢迎关注我的公众号呦，率先更新内容，并且后续还有一些源码级的免费教程推出。**
 
-
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/gzh.jpg" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/gzh.jpg" width="600"/> </div><br>

@@ -667,7 +667,7 @@ HTTP 由于是明文传输，所以安全上存在以下三个风险：
 
 HTTP**S** 在 HTTP 与 TCP 层之间加入了 `SSL/TLS` 协议。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015223154.png)
+![](../../imgs/20201015223154.png)
 
 可以很好的解决了上述的风险：
 
@@ -687,7 +687,7 @@ HTTP**S** 在 HTTP 与 TCP 层之间加入了 `SSL/TLS` 协议。
 
 通过**混合加密**的方式可以保证信息的**机密性**，解决了窃听的风险。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015223229.png)
+![](../../imgs/20201015223229.png)
 
 HTTPS 采用的是**对称加密**和**非对称加密**结合的「混合加密」方式：
 
@@ -703,7 +703,7 @@ HTTPS 采用的是**对称加密**和**非对称加密**结合的「混合加密
 
 **摘要算法**用来实现**完整性**，能够为数据生成独一无二的「指纹」，用于校验数据的完整性，解决了篡改的风险。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015223318.png)
+![](../../imgs/20201015223318.png)
 
 客户端在发送明文之前会通过摘要算法算出明文的「指纹」，发送的时候把「指纹 + 明文」一同
 加密成密文后，发送给服务器，服务器解密后，用相同的摘要算法算出发送过来的明文，通过比较客户端携带的「指纹」和当前算出的「指纹」做比较，若「指纹」相同，说明数据是完整的。
@@ -716,7 +716,7 @@ HTTPS 采用的是**对称加密**和**非对称加密**结合的「混合加密
 
 所以这里就需要借助第三方权威机构 `CA` （数字证书认证机构），将**服务器公钥放在数字证书**（由数字证书认证机构颁发）中，只要证书是可信的，公钥就是可信的。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015223349.png)
+![](../../imgs/20201015223349.png)
 
 通过数字证书的方式保证服务器公钥的身份，解决冒充的风险。
 
@@ -730,11 +730,11 @@ SSL/TLS 协议基本流程：
 
 前两步也就是 SSL/TLS 的建立过程，也就是握手阶段。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20210203221735.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20210203221735.png" width="600"/> </div><br>
 
 SSL/TLS 的「握手阶段」涉及**四次**通信，可见下图：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015223412.png)
+![](../../imgs/20201015223412.png)
 
 SSL/TLS 协议建立的详细流程：
 
@@ -897,7 +897,7 @@ HTTP/2 不再像 HTTP/1.1 里的纯文本形式的报文，而是全面采用了
 
 头信息和数据体都是二进制，并且统称为帧（frame）：**头信息帧和数据帧**。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015220843.png)
+![](../../imgs/20201015220843.png)
 
 这样虽然对人不友好，但是对计算机非常友好，因为计算机只懂二进制，那么收到报文后，无需再将明文的报文转成二进制，而是直接解析二进制报文，这**增加了数据传输的效率**。
 
@@ -911,7 +911,7 @@ HTTP/2 的数据包不是按顺序发送的，同一个连接里面连续的数�
 
 客户端还可以**指定数据流的优先级**。优先级高的请求，服务器就先响应该请求。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015220912.png)
+![](../../imgs/20201015220912.png)
 
 *4. 多路复用*
 
@@ -938,7 +938,7 @@ HTTP/2 主要的问题在于：多个 HTTP 请求在复用一个 TCP 连接，�
 
 这都是基于 TCP 传输层的问题，所以 **HTTP/3 把 HTTP 下层的 TCP 协议改成了 UDP！**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015221007.png)
+![](../../imgs/20201015221007.png)
 
 UDP 发生是不管顺序，也不管丢包的，所以不会出现 HTTP/1.1 的队头阻塞 和 HTTP/2 的一个丢包全部重传问题。
 
@@ -948,7 +948,7 @@ UDP 发生是不管顺序，也不管丢包的，所以不会出现 HTTP/1.1 的
 - TL3 升级成了最新的 `1.3` 版本，头部压缩算法也升级成了 `QPack`。
 - HTTPS 要建立一个连接，要花费 6 次交互，先是建立三次握手，然后是 `TLS/1.3` 的三次握手。QUIC 直接把以往的 TCP 和 `TLS/1.3` 的 6 次交互**合并成了 3 次，减少了交互次数**。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201015221032.png)
+![](../../imgs/20201015221032.png)
 
 所以， QUIC 是一个在 UDP 之上的**伪** TCP + TLS + HTTP/2 的多路复用的协议。
 

@@ -44,7 +44,7 @@
 ## 公众号
 
 **欢迎关注我的公众号呦，率先更新内容，并且后续还有一些源码级的免费教程推出。**
-![](http://wardseptember.club/Fsis2Lao1zRA-RpbsTEDA0_z04wb)
+![](../../imgs/Fsis2Lao1zRA-RpbsTEDA0_z04wb)
 
 ## 贡献
 
