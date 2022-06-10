@@ -102,6 +102,7 @@
 * [SQL](http://www.cyc2018.xyz/数据库/SQL%20语法.html)
 * [Mysql基础](http://www.cyc2018.xyz/数据库/MySQL.html)
 * [Mysql调优](/docs/Mysql/mysql调优笔记.md)
+* [Redis](/docs/Redis.md)
 
 ### 网络
 
