@@ -16,7 +16,7 @@ JRE 是 Java运行时环境。它是运行已编译 Java 程序所需的所有�
 
 简单地说，JRE就是运行Java字节码的虚拟机。但是，如果只有Java源码，要编译成Java字节码，就需要JDK，因为JDK除了包含JRE，还提供了编译器、调试器等开发工具。
 
-![image-20200302140334046](https://gitee.com/wardseptember/images/raw/master/imgs/FkFHBGhlwkvD7j7wPFUnRCjrOHSX)
+![image-20200302140334046](../imgs/FkFHBGhlwkvD7j7wPFUnRCjrOHSX)
 
 我们需要格外注意的是 .class->机器码 这一步。在这一步 JVM 类加载器首先加载字节码文件，然后通过解释器逐行解释执行，这种方式的执行速度会相对比较慢。而且，有些方法和代码块是经常需要被调用的(也就是所谓的热点代码)，所以后面引进了 JIT 编译器，而JIT 属于运行时编译。当 JIT 编译器完成第一次编译后，其会将字节码对应的机器码保存下来，下次可以直接使用。而我们知道，机器码的运行效率肯定是高于 Java 解释器的。这也解释了我们为什么经常会说 Java 是编译与解释共存的语言。
 
@@ -150,8 +150,6 @@ if (r < 0.00001) {
 # 面向对象编程
 
 ## 面向对象基础
-
-
 
 ### 可变参数
 
@@ -2300,7 +2298,7 @@ Java标准库自带的`java.util`包提供了集合类：`Collection`，它是�
 - `Set`：一种保证没有重复元素的集合，例如，所有无重复名称的`Student`的`Set`；
 - `Map`：一种通过键值（key-value）查找的映射表集合，例如，根据`Student`的`name`查找对应`Student`的`Map`。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/FgPceiQ8m6EUWxVQtN6Riy5-FSYo" width="600"/> </div><br>
+<div align="center"> <img src="../imgs/FgPceiQ8m6EUWxVQtN6Riy5-FSYo" width="600"/> </div><br>
 
 最后，Java访问集合总是通过统一的方式——迭代器（Iterator）来实现，它最明显的好处在于无需知道集合内部元素是按什么方式存储的。
 

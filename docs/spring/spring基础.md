@@ -14,7 +14,7 @@ AOP(Aspect-Oriented Programming:面向切面编程)能够将那些与业务无�
 
 **Spring AOP就是基于动态代理的**，如果要代理的对象，实现了某个接口，那么Spring AOP会使用**JDK Proxy**，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候Spring AOP会使用**Cglib** ，这时候Spring AOP会使用 **Cglib** 生成一个被代理对象的子类来作为代理，如下图所示：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201013201004.png)
+![](../../imgs/20201013201004.png)
 
 当然你也可以使用 AspectJ ,Spring AOP 已经集成了AspectJ ，AspectJ 应该算的上是 Java 生态系统中最完整的 AOP 框架了。
 
@@ -113,13 +113,13 @@ public OneService getService(status) {
 - 当要销毁 Bean 的时候，如果 Bean 实现了 `DisposableBean` 接口，执行 `destroy()` 方法。
 - 当要销毁 Bean 的时候，如果 Bean 在配置文件中的定义包含 destroy-method 属性，执行指定的方法。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201013222034.png)
+![](../../imgs/20201013222034.png)
 
 # Spring MVC
 
 MVC 是一种设计模式,Spring MVC 是一款很优秀的 MVC 框架。Spring MVC 可以帮助我们进行更简洁的Web层的开发，并且它天生与 Spring 框架集成。Spring MVC 下我们一般把后端项目分为 Service层（处理业务）、Dao层（数据库操作）、Entity层（实体类）、Controller层(控制层，返回数据给前台页面)。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201013222658.png)
+![](../../imgs/20201013222658.png)
 
 **流程说明（重要）：**
 
@@ -276,7 +276,7 @@ Spring 中默认存在以下事件，他们都是对 `ApplicationContextEvent` �
 - `ContextRefreshedEvent`：`ApplicationContext` 初始化或刷新完成后触发的事件;
 - `ContextClosedEvent`：`ApplicationContext` 关闭后触发的事件。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201014141044.png)
+![](../../imgs/20201014141044.png)
 
 ### 事件监听者角色
 
@@ -391,7 +391,7 @@ if(mappedHandler.getHandler() instanceof MultiActionController){
 
 装饰者模式可以动态地给对象添加一些额外的属性或行为。相比于使用继承，装饰者模式更加灵活。简单点儿说就是当我们需要修改原有的功能，但我们又不愿直接去修改原有的代码时，设计一个Decorator套在原有代码外面。其实在 JDK 中就有很多地方用到了装饰者模式，比如 `InputStream`家族，`InputStream` 类下有 `FileInputStream` (读取文件)、`BufferedInputStream` (增加缓存,使读取文件速度大大提升)等子类都在不修改`InputStream` 代码的情况下扩展了它的功能。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201014141538.png)
+![](../../imgs/20201014141538.png)
 
 Spring 中配置 DataSource 的时候，DataSource 可能是不同的数据库和数据源。我们能否根据客户的需求在少修改原有类的代码下动态切换不同的数据源？这个时候就要用到装饰者模式(这一点我自己还没太理解具体原理)。Spring 中用到的包装器模式在类名上含有 `Wrapper`或者 `Decorator`。这些类基本上都是动态地给一个对象添加一些额外的职责。
 
@@ -431,7 +431,7 @@ Cookie 和 Session都是用来跟踪浏览器用户身份的会话方式，但�
 
 很多时候我们都是通过 SessionID 来实现特定的用户，SessionID 一般会选择存放在 Redis 中。举个例子：用户成功登陆系统，然后返回给客户端具有 SessionID 的 Cookie，当用户向后端发起请求的时候会把 SessionID 带上，这样后端就知道你的身份状态了。关于这种认证方式更详细的过程如下：
 
- ![](https://gitee.com/wardseptember/images/raw/master/imgs/20201014162522.png)
+ ![](../../imgs/20201014162522.png)
 
 1. 用户向服务器发送用户名和密码用于登陆系统。
 2. 服务器验证通过后，服务器为用户创建一个 Session，并将 Session信息存储 起来。
@@ -492,7 +492,7 @@ JWT 由 3 部分构成:
 
 在基于 Token 进行身份验证的的应用程序中，服务器通过`Payload`、`Header`和一个密钥(`secret`)创建令牌（`Token`）并将 `Token` 发送给客户端，客户端将 `Token` 保存在 Cookie 或者 localStorage 里面，以后客户端发出的所有请求都会携带这个令牌。你可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP Header 的 Authorization字段中：` Authorization: Bearer Token`。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201014163214.png)
+![](../../imgs/20201014163214.png)
 
 1. 用户向服务器发送用户名和密码用于登陆系统。
 2. 身份验证服务响应并返回了签名的 JWT，上面包含了用户是谁的内容。

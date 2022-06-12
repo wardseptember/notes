@@ -522,9 +522,9 @@ systemctl start keepalived.service
 
 # Nginx的原理解析
 
-![](http://wardseptember.top/20200730215209.png)
+![](../imgs/20200730215209.png)
 
-![](http://wardseptember.top/20200730215348.png)
+![](../imgs/20200730215348.png)
 
 一个master和多个worker的好处:
 

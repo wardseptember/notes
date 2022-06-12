@@ -2,7 +2,7 @@
 
 ## Mysql体系结构——概述
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200925110039.png)
+![](../../imgs/20200925110039.png)
 
 MySQL 从概念上分为四层，这四层自顶向下分别是网络连接层，服务层（核心层），存储引擎层，系统文件层。我们自顶向下开始讲解。
 
@@ -196,11 +196,11 @@ syslog_tag = stock#mysqld_stock
 
 那么，通过查询日志一般用来做什么呢？通用查询日志一般用来做审计用的，用于记录 MySQL 的所有操作，可以追踪用户的登录信息、操作信息等。比如公司有一个财务工资库，只有一个人有权限，这个时候就需要使用审计功能了。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200927194525.png)
+![](../../imgs/20200927194525.png)
 
 开启通用查询日志后，MySQL 性能损耗太大，MySQL 官方企业版提供了 MySQL Enterprise Audit 插件，这个是需要收费的。Audit 插件是异步记录日志的，所以性能比较高，不会像通用查询日志这样性能损耗比较大。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200927194601.png)
+![](../../imgs/20200927194601.png)
 
 MariaDB 官方提供了 Audit 插件，是免费的，可以兼容 MySQL。参考地址：
 
@@ -236,11 +236,11 @@ show master logs;
 
 MySQL 的配置文件 my.cnf 中有一个参数 datadir，配置了 MySQL 数据文件的存放位置，如下图所示。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200927194628.png)
+![](../../imgs/20200927194628.png)
 
 比如我们要看 engine 数据库的文件内容，如下图所示。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200927194719.png)
+![](../../imgs/20200927194719.png)
 
 ibdata1 文件是系统表空间（数据文件）undo 段，文件存放在 datadir 目录下。
 

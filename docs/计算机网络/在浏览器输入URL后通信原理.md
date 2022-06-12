@@ -8,7 +8,7 @@
 
 首先判断你输入的是一个合法的 URL 还是一个待搜索的关键词，并且根据你输入的内容进行自动完成、字符编码等操作。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017194058.png)
+![](../../imgs/20201017194058.png)
 
 **HSTS**
 
@@ -20,13 +20,13 @@
 
 **检查缓存**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201016201651.png)
+![](../../imgs/20201016201651.png)
 
 > 生产 HTTP 请求信息
 
 对 `URL` 进行解析之后，浏览器确定了 Web 服务器和文件名，接下来就是根据这些信息来生成 HTTP 请求消息了。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017194203.png)
+![](../../imgs/20201017194203.png)
 
 # **DNS 查询**
 
@@ -71,7 +71,7 @@ ISP DNS 就是在客户端电脑上设置的首选 DNS 服务器，它们在大�
 7. 权威 DNS 服务器查询后将对应的 IP 地址 X.X.X.X 告诉本地 DNS。
 8. 本地 DNS 再将 IP 地址返回客户端，客户端和目标建立连接。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017194528.png)
+![](../../imgs/20201017194528.png)
 
 # 协议栈
 
@@ -79,7 +79,7 @@ ISP DNS 就是在客户端电脑上设置的首选 DNS 服务器，它们在大�
 
 协议栈的内部分为几个部分，分别承担不同的工作。上下关系是有一定的规则的，上面的部分会向下面的部分委托工作，下面的部分收到委托的工作并执行。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017200641.png)
+![](../../imgs/20201017200641.png)
 
 应用程序（浏览器）通过调用 Socket 库，来委托协议栈工作。协议栈的上半部分有两块，分别是负责收发数据的 TCP 和 UDP 协议，它们两会接受应用层的委托执行收发数据的操作。
 
@@ -100,7 +100,7 @@ HTTP 是基于 TCP 协议传输的，所以在这我们先了解下 TCP 协议�
 
 我们先看看 TCP 报文头部的格式：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017201300.png)
+![](../../imgs/20201017201300.png)
 
 首先，**源端口号**和**目标端口**号是不可少的，如果没有这两个端口号，数据就不知道应该发给哪个应用。
 
@@ -120,7 +120,7 @@ HTTP 是基于 TCP 协议传输的，所以在这我们先了解下 TCP 协议�
 
 这个所谓的「连接」，只是双方计算机里维护一个状态机，在连接建立的过程中，双方的状态变化时序图就像这样。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017201350.png)
+![](../../imgs/20201017201350.png)
 
 - 一开始，客户端和服务端都处于 `CLOSED` 状态。先是服务端主动监听某个端口，处于 `LISTEN` 状态。
 - 然后客户端主动发起连接 `SYN`，之后处于 `SYN-SENT` 状态。
@@ -134,20 +134,20 @@ HTTP 是基于 TCP 协议传输的，所以在这我们先了解下 TCP 协议�
 
 TCP 的连接状态查看，在 Linux 可以通过 `netstat -napt` 命令查看。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017201415.png)
+![](../../imgs/20201017201415.png)
 
 > TCP 分割数据
 
 如果 HTTP 请求消息比较长，超过了 `MSS` 的长度，这时 TCP 就需要把 HTTP 的数据拆解一块块的数据发送，而不是一次性发送所有数据。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017201439.png)
+![](../../imgs/20201017201439.png)
 
 - `MTU`：一个网络包的最大长度，以太网中一般为 `1500` 字节。
 - `MSS`：除去 IP 和 TCP 头部之后，一个网络包所能容纳的 TCP 数据的最大长度。
 
 数据会被以 `MSS` 的长度为单位进行拆分，拆分出来的每一块数据都会被放进单独的网络包中。也就是在每个被拆分的数据加上 TCP 头信息，然后交给 IP 模块来发送数据。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017201500.png)
+![](../../imgs/20201017201500.png)
 
 > TCP 报文生成
 
@@ -157,7 +157,7 @@ TCP 协议里面会有两个端口，一个是浏览器监听的端口（通常�
 
 至此，网络包的报文如下图。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017201531.png)
+![](../../imgs/20201017201531.png)
 
 
 
@@ -169,7 +169,7 @@ TCP 模块在执行连接、收发、断开等各阶段操作时，都需要委�
 
 我们先看看 IP 报文头部的格式：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017203314.png)
+![](../../imgs/20201017203314.png)
 
 在 IP 协议里面需要有**源地址 IP** 和 **目标地址 IP**：
 
@@ -188,11 +188,11 @@ TCP 模块在执行连接、收发、断开等各阶段操作时，都需要委�
 
 目标ip与子网掩码做与运算，如果运算结果等于Destination，就说明匹配到了，将数据发送到gateway，gateway的值就是路由器的IP。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017204301.png)
+![](../../imgs/20201017204301.png)
 
 举个例子，根据上面的路由表，我们假设 Web 服务器的目标地址是 `192.168.10.200`。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017204322.png)
+![](../../imgs/20201017204322.png)
 
 1. 首先先和第一条条目的子网掩码（`Genmask`）进行 **与运算**，得到结果为 `192.168.10.0`，但是第一个条目的 `Destination` 是 `192.168.3.0`，两者不一致所以匹配失败。
 2. 再与第二条目的子网掩码进行 **与运算**，得到的结果为 `192.168.10.0`，与第二条目的 `Destination 192.168.10.0` 匹配成功，所以将使用 `eth1` 网卡的 IP 地址作为 IP 包头的源地址。
@@ -205,7 +205,7 @@ TCP 模块在执行连接、收发、断开等各阶段操作时，都需要委�
 
 至此，网络包的报文如下图。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017204349.png)
+![](../../imgs/20201017204349.png)
 
 # 两点传输——MAC
 
@@ -236,7 +236,7 @@ MAC 头部是以太网使用的头部，它包含了接收方和发送方的 MAC
 
 此时就需要 `ARP` 协议帮我们找到路由器的 MAC 地址。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017204723.png)
+![](../../imgs/20201017204723.png)
 
 ARP 协议会在以太网中以**广播**的形式，对以太网所有的设备喊出：“这个 IP 地址是谁的？请把你的 MAC 地址告诉我”。
 
@@ -257,13 +257,13 @@ ARP 协议会在以太网中以**广播**的形式，对以太网所有的设备
 
 在 Linux 系统中，我们可以使用 `arp -a` 命令来查看 ARP 缓存的内容。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017205116.png)
+![](../../imgs/20201017205116.png)
 
 > MAC 报文生成
 
 至此，网络包的报文如下图。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017205136.png)
+![](../../imgs/20201017205136.png)
 
 
 
@@ -275,7 +275,7 @@ IP 生成的网络包只是存放在内存中的一串二进制数字信息，�
 
 网卡驱动从 IP 模块获取到包之后，会将其**复制**到网卡内的缓存区中，接着会其**开头加上报头和起始帧分界符，在末尾加上用于检测错误的帧校验序列**。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017205237.png)
+![](../../imgs/20201017205237.png)
 
 - 起始帧分界符是一个用来表示包起始位置的标记
 - 末尾的 `FCS`（帧校验序列）用来检查包传输过程是否有损坏
@@ -301,7 +301,7 @@ IP 生成的网络包只是存放在内存中的一串二进制数字信息，�
 - 一个是设备的 MAC 地址，
 - 另一个是该设备连接在交换机的哪个端口上。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017211202.png)
+![](../../imgs/20201017211202.png)
 
 举个例子，如果收到的包的接收方 MAC 地址为 `00-02-B3-1C-9C-F9`，则与图中表中的第 3 行匹配，根据端口列的信息，可知这个地址位于 `3` 号端口上，然后就可以通过交换电路将包发送到相应的端口了。
 
@@ -365,7 +365,7 @@ IP 生成的网络包只是存放在内存中的一串二进制数字信息，�
 
 转发操作分为几个阶段，首先是查询**路由表**判断转发目标。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017215202.png)
+![](../../imgs/20201017215202.png)
 
 具体的工作流程根据上图，举个例子。
 
@@ -408,7 +408,7 @@ IP 生成的网络包只是存放在内存中的一串二进制数字信息，�
 
 服务器高兴的不得了，于是开始扒数据包的皮！就好像你收到快递，能不兴奋吗？
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201017215256.png)
+![](../../imgs/20201017215256.png)
 
 数据包抵达服务器后，服务器会先扒开数据包的 MAC 头部，查看是否和服务器自己的 MAC 地址符合，符合就将包收起来。
 
@@ -422,7 +422,7 @@ IP 生成的网络包只是存放在内存中的一串二进制数字信息，�
 
 **大致流程**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201016202005.png)
+![](../../imgs/20201016202005.png)
 
 **HTTPD**
 
@@ -470,7 +470,7 @@ HTTP 响应报文也需要穿上 TCP、IP、MAC 头部，不过这次是源地�
 
 # **渲染页面**
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201016202243.png)
+![](../../imgs/20201016202243.png)
 
 略
 

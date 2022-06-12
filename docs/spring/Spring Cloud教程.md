@@ -6,9 +6,9 @@
 
 spring cloud是一系列服务的集合。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Flfun7Y203z43PkT4NLcp7DkLBOm)
+![](../../imgs/Flfun7Y203z43PkT4NLcp7DkLBOm)
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Fng5_6HiV4ECmNG-lNQgAfkgnJbI)
+![](../../imgs/Fng5_6HiV4ECmNG-lNQgAfkgnJbI)
 
 
 
@@ -16,9 +16,9 @@ spring cloud是一系列服务的集合。
 
 因为教程原因，请选择以下版本，自己学完以后可以再升级。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Foo8uNSJ3DdjSvtvK0vCpUszNl1Q)
+![](../../imgs/Foo8uNSJ3DdjSvtvK0vCpUszNl1Q)
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/Fvb2CVnLQjB7H0k6ZJXreMPLadln)
+![](../../imgs/Fvb2CVnLQjB7H0k6ZJXreMPLadln)
 
 Spring cloud官网教程
 
@@ -36,14 +36,14 @@ Spring cloud官网教程
 
 ## 服务降级
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FrqaOjyW6bEaYePwdGJDot7J3pv1)
+![](../../imgs/FrqaOjyW6bEaYePwdGJDot7J3pv1)
 
 ## 服务熔断
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FilUMzjhnIHlhhF4tUwUTmGDmwPQ)
+![](../../imgs/FilUMzjhnIHlhhF4tUwUTmGDmwPQ)
 
 
 
 ## 服务限流
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/FvgRcixwspGoJQSeY4UcpCw0hriX)
+![](../../imgs/FvgRcixwspGoJQSeY4UcpCw0hriX)

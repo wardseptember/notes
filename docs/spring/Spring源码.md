@@ -391,7 +391,7 @@ Bean生命周期主要为四个阶段
 
 如果同时使用上面三种方法和实现BeanPostProcessor，他们的执行顺序如下图：
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/Xnip2021-01-22_18-34-41.jpg" width="600" height = "1500"/> </div><br>
+<div align="center"> <img src="../../imgs/Xnip2021-01-22_18-34-41.jpg" width="600" height = "1500"/> </div><br>
 
 ### Bean生命周期
 
@@ -466,7 +466,7 @@ AOP(Aspect-Oriented Programming:面向切面编程)能够将那些与业务无�
 
 **Spring AOP就是基于动态代理的**，如果要代理的对象，实现了某个接口，那么Spring AOP会使用**JDK Proxy**，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候Spring AOP会使用**Cglib** ，这时候Spring AOP会使用 **Cglib** 生成一个被代理对象的子类来作为代理，如下图所示：
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20201013201004.png)
+![](../../imgs/20201013201004.png)
 
 当然你也可以使用 AspectJ ,Spring AOP 已经集成了AspectJ ，AspectJ 应该算的上是 Java 生态系统中最完整的 AOP 框架了。
 

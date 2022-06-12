@@ -381,13 +381,13 @@ DatagramChannel: UDP
 
 Bufer顾名思义，它是一个缓冲区，实际上是一个容器，一个连续数组。Channel提供从文件、网络读取数据的渠道，但是读写的数据都必须经过Buffer。
 
-![](http://wardseptember.top/20200712142636.png)
+![](../imgs/20200712142636.png)
 
 Buffer缓冲区本质上是一块可以写入数据，然后可以从中读取数据的内存。这块内存被包装成NIO Buffer对象，并提供了一组方法，用来方便的访问该模块内存。为了理解Buffer的工作原理，需要熟悉它的三个属性：capacity、position和limit。
 
 position和limit的含义取决于Buffer处在读模式还是写模式。不管Buffer处在什么模式，capacity的含义总是一样的。见下图：
 
-![](http://wardseptember.top/20200712142706.png)
+![](../imgs/20200712142706.png)
 
 * capacity：作为一个内存块，Buffer有固定的大小值，也叫作“capacity”，只能往其中写入capacity个byte、long、char等类型。一旦Buffer满了，需要将其清空（通过读数据或者清楚数据）才能继续写数据。
 
@@ -453,5 +453,4 @@ Selector与Channel是相互配合使用的，将Channel注册在Selector上之�
 - [Browse the source code of userspace/glibc/sysdeps/unix/sysv/linux/ online](https://code.woboq.org/userspace/glibc/sysdeps/unix/sysv/linux/)
 - [林亚希](https://www.jianshu.com/u/56856a29baac)
 - [CS-Notes](https://cyc2018.github.io/CS-Notes/#/notes/Socket)
-
 
