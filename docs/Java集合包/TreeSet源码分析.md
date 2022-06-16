@@ -4,7 +4,7 @@ TreeSet是一个无序、不重复的集合，无序指的是无法按照插入�
 
 TreeSet是通过TreeMap实现的，TreeMap的key就是TreeSet不重复的集合，TreeMap的value都指向同一个Object实例，本质上还是通过红黑树实现的。可见[TreeMap源码分析](https://wardseptember.gitee.io/mynotes/#/docs/Java%E9%9B%86%E5%90%88%E5%8C%85/TreeMap%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201206210941.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201206210941.png" width="600"/> </div><br>
 
 # 源码
 

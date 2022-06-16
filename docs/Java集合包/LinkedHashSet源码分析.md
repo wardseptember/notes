@@ -12,7 +12,7 @@ LinkedHashSet是一个能记录插入顺序的hashset，继承自HashSet，主�
 
 LinkedHashSet使用LinkedHashMap实现的，LinkedHashMap又继承自HashMap，如果你看过我写的[LinkedHashMap源码分析](https://wardseptember.gitee.io/mynotes/#/docs/Java%E9%9B%86%E5%90%88%E5%8C%85/LinkedHashMap%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90)和[HashSet源码分析](https://wardseptember.gitee.io/mynotes/#/docs/Java%E9%9B%86%E5%90%88%E5%8C%85/HashSet%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)，理解LinkedHashSet就非常容易了。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201206181926.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201206181926.png" width="600"/> </div><br>
 
 LinkedHashSet是基于双向链表和HashMap实现的，HashMap的key就是LinkedHashSet就是不重复的集合，HashMap的Value指向同一个Object实例。
 

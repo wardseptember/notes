@@ -6,7 +6,7 @@ LinkedHashMap允许key和value都为null情况，非线程安全。
 
 LinkedHashMap是利用hashmap和双向链表实现的。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201206144255.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201206144255.png" width="600"/> </div><br>
 
 LinkedHashMap继承了HashMap，实现了Map接口。
 

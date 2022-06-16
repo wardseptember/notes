@@ -102,7 +102,7 @@ Hotspot遍历所有对象时，按照年龄从小到大对其所占用的大小�
 
 ### 方法区
 
-方法区与 Java 堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。虽然 **Java 虚拟机规范把方法区描述为堆的一个逻辑部分**，但是它却有一个别名叫做 **Non-Heap（非堆）**，目的应该是与 Java 堆区分开来。方法区也被称为永久代。
+方法区与 Java 堆一样，是各个线程共享的内存区域，它用于存储已被虚拟机加载的类信息（包括类的名称、方法信息、字段信息）、常量、静态变量、即时编译器编译后的代码等数据。虽然 **Java 虚拟机规范把方法区描述为堆的一个逻辑部分**，但是它却有一个别名叫做 **Non-Heap（非堆）**，目的应该是与 Java 堆区分开来。方法区也被称为永久代。
 
 #### 方法区和永久代的关系
 
@@ -467,13 +467,15 @@ Java 堆是垃圾收集器管理的主要区域，因此也被称作**GC 堆（G
 
 ![](../imgs/FjaEIQYLzU19RKIG_MKpbJINrtTB)
 
-上图所示的 eden 区、s0("From") 区、s1("To") 区都属于新生代，tentired 区属于老年代。大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s1("To")，并且对象的年龄还会加 1(Eden 区->Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 `-XX:MaxTenuringThreshold` 来设置。经过这次GC后，Eden区和"From"区已经被清空。这个时候，"From"和"To"会交换他们的角色，也就是新的"To"就是上次GC前的“From”，新的"From"就是上次GC前的"To"。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，"To"区被填满之后，会将所有对象移动到老年代中。
+上图所示的 eden 区、s0("From") 区、s1("To") 区都属于新生代，tentired 区属于老年代。大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s1("To")，并且对象的年龄还会加 1(Eden 区->Survivor 区后对象的初始年龄变为 1)，而在“From”区中，仍存活的对象会根据他们的年龄值来决定去向，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中，没有达到阈值的对象会被复制到“To”区域。经过这次GC后，Eden区和"From"区已经被清空。这个时候，"From"和"To"会交换他们的角色，也就是新的"To"就是上次GC前的“From”，新的"From"就是上次GC前的"To"。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，"To"区被填满之后，会将所有对象移动到老年代中。
 
 ### 对象优先在 eden 区分配
 
 目前主流的垃圾收集器都会采用分代回收算法，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。
 
 大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC，如果当Minor GC后eden区依然没有足够的空间进行分配，只好通过**分配担保机制** 把新生代的对象提前转移到老年代中去；如果执行分配担保机制后eden区依然存不下该对象，则再老年代分配；如果能存在，则继续在eden区分配。
+
+> Minor gc后eden区存活对象可能在“To”区存不下，就会触发分配担保机制。
 
 **Minor GC 和 Full GC 有什么不同呢？**
 
@@ -1721,7 +1723,7 @@ protected Class<?> loadClass(String name, boolean resolve)
 
     常用操作的响应时间列表：
 
-    <div align="center"> <img src="../imgs/20210204140230.png" width="500"/> </div><br>
+    <div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204140230.png" width="500"/> </div><br>
 
     在垃圾回收环节中：
 
@@ -1755,7 +1757,7 @@ Jps [options] [hostid]
 
 options参数如下图：
 
-<div align="center"> <img src="../imgs/20210204141932.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204141932.png" width="600"/> </div><br>
 
 ### jstat
 
@@ -1767,9 +1769,9 @@ jstat(JVM Statistics Monitoring  Tool)查看JVM统计信息
 
 Jstat -h 查看命令相关参数
 
-<div align="center"> <img src="../imgs/20210204155936.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204155936.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204160441.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204160441.png" width="600"/> </div><br>
 
 
 
@@ -1781,7 +1783,7 @@ Jstat -h 查看命令相关参数
 
 #### 判断内存泄露
 
-<div align="center"> <img src="../imgs/20210204160904.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204160904.png" width="600"/> </div><br>
 
 ### jinfo
 
@@ -1791,9 +1793,9 @@ Jinfo(Configuration Info for Java) 查看虚拟机配置参数信息，也可用
 
 Jinfo [options] pid
 
-<div align="center"> <img src="../imgs/20210204161820.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204161820.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204162226.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204162226.png" width="600"/> </div><br>
 
 
 
@@ -1801,19 +1803,19 @@ Jinfo [options] pid
 
 Jmap(JVM Memory Map)：一方面是获取dump文件（堆转储快照文件，二进制文件），它还可以获取目标Java进程的内存相关信息，包括Java堆各区域的使用情况、堆中对象的统计信息、类加载信息等。
 
-<div align="center"> <img src="../imgs/20210204164401.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204164401.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204164546.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204164546.png" width="600"/> </div><br>
 
 #### 
 
 #### 导出内存映像文件
 
-<div align="center"> <img src="../imgs/20210204164911.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204164911.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204165015.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204165015.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204165612.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204165612.png" width="600"/> </div><br>
 
 
 
@@ -1824,27 +1826,27 @@ Jmap(JVM Memory Map)：一方面是获取dump文件（堆转储快照文件，�
 * Jmap -permstat pid 查看系统的ClassLoader信息
 * Jmap -finalizerinfo 查看堆积在finalizer队列中的对象
 
-<div align="center"> <img src="../imgs/20210204221856.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204221856.png" width="600"/> </div><br>
 
 ### jat
 
 Jhat(JVM Heap Analysis Tool)是JDK自带的堆分析工具
 
-<div align="center"> <img src="../imgs/20210204222100.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204222100.png" width="600"/> </div><br>
 
 #### 基本语法
 
 jhat [option] [dumpfile]
 
-<div align="center"> <img src="../imgs/20210204222640.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204222640.png" width="600"/> </div><br>
 
 ### Jstack(JVM Stack Trace)
 
 Jstack：用于生成虚拟机指定进程当前时刻的线程快照（虚拟机堆栈跟踪）。线程快照就是当前虚拟机内指定进程的每一条线程正在执行的方法堆栈的集合。
 
-<div align="center"> <img src="../imgs/20210204223116.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204223116.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204223650.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204223650.png" width="600"/> </div><br>
 
 
 
@@ -1852,289 +1854,289 @@ Jstack：用于生成虚拟机指定进程当前时刻的线程快照（虚拟�
 
 ### jcmd
 
-<div align="center"> <img src="../imgs/20210204224114.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204224114.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204224259.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204224259.png" width="600"/> </div><br>
 
 ### jstatd
 
-<div align="center"> <img src="../imgs/20210204224820.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204224820.png" width="600"/> </div><br>
 
 ## 图形化工具
 
-<div align="center"> <img src="../imgs/20210204225101.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204225101.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204225255.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204225255.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204225450.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204225450.png" width="600"/> </div><br>
 
 ### Jconsole
 
-<div align="center"> <img src="../imgs/20210204225614.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204225614.png" width="600"/> </div><br>
 
 
 
 ### Visual VM
 
-<div align="center"> <img src="../imgs/20210204230331.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204230331.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204230622.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204230622.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210204231200.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204231200.png" width="600"/> </div><br>
 
 主要功能
 
-<div align="center"> <img src="../imgs/20210204231253.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210204231253.png" width="600"/> </div><br>
 
 ### MAT
 
-<div align="center"> <img src="../imgs/20210205102345.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210205102345.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210205102556.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210205102556.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210205105844.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210205105844.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210205111556.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210205111556.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210205111806.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210205111806.png" width="600"/> </div><br>
 
 ### tomcat
 
-<div align="center"> <img src="../imgs/20210205112716.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210205112716.png" width="600"/> </div><br>
 
 ### JProfile
 
-<div align="center"> <img src="../imgs/20210206094825.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206094825.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206095033.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206095033.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206095528.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206095528.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206100408.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206100408.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206103633.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206103633.png" width="600"/> </div><br>
 
 ### Arthas
 
-<div align="center"> <img src="../imgs/20210206104509.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206104509.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206104637.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206104637.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206104758.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206104758.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206104918.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206104918.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206105534.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206105534.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206105638.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206105638.png" width="600"/> </div><br>
 
 #### 命令
 
-<div align="center"> <img src="../imgs/20210206105813.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206105813.png" width="600"/> </div><br>
 
 * [官网教程](https://arthas.aliyun.com/doc/arthas-tutorials.html?language=cn)
 
-<div align="center"> <img src="../imgs/20210206111912.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206111912.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206113352.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206113352.png" width="600"/> </div><br>
 
 ### Java Mission Control
 
-<div align="center"> <img src="../imgs/20210206115138.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206115138.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206115338.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206115338.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206120738.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206120738.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206120822.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206120822.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206120938.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206120938.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206121005.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206121005.png" width="600"/> </div><br>
 
 ### Flame Graphs
 
-<div align="center"> <img src="../imgs/20210206121210.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206121210.png" width="600"/> </div><br>
 
 ### Tprofiler
 
-<div align="center"> <img src="../imgs/20210206121445.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206121445.png" width="600"/> </div><br>
 
 
 
 ## 内存泄露
 
-<div align="center"> <img src="../imgs/20210206085545.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206085545.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206085935.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206085935.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206090044.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206090044.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206090243.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206090243.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206090352.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206090352.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206090542.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206090542.png" width="600"/> </div><br>
 
 
 
 ### 静态集合类
 
-<div align="center"> <img src="../imgs/20210206091434.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206091434.png" width="600"/> </div><br>
 
 ### 单例模式
 
-<div align="center"> <img src="../imgs/20210206091538.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206091538.png" width="600"/> </div><br>
 
 
 
 ### 内部类持有外部类
 
-<div align="center"> <img src="../imgs/20210206091718.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206091718.png" width="600"/> </div><br>
 
 ### 各种连接
 
-<div align="center"> <img src="../imgs/20210206091826.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206091826.png" width="600"/> </div><br>
 
 ### 变量不合理的作用域
 
-<div align="center"> <img src="../imgs/20210206091949.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206091949.png" width="600"/> </div><br>
 
 ### 改变哈希值
 
-<div align="center"> <img src="../imgs/20210206092258.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206092258.png" width="600"/> </div><br>
 
 
 
 ### 缓存泄漏
 
-<div align="center"> <img src="../imgs/20210206093053.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206093053.png" width="600"/> </div><br>
 
 ### 监听器和回调
 
-<div align="center"> <img src="../imgs/20210206093340.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206093340.png" width="600"/> </div><br>
 
 ## JVM运行时参数
 
-<div align="center"> <img src="../imgs/20210206122007.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206122007.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206122210.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206122210.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206122330.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206122330.png" width="600"/> </div><br>
 
  
 
-<div align="center"> <img src="../imgs/20210206122520.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206122520.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206123728.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206123728.png" width="600"/> </div><br>
 
 `java -X`
 
-<div align="center"> <img src="../imgs/20210206123919.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206123919.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206124203.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206124203.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206125035.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206125035.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206125554.png" width="600"/> </div><br>
-
-
-
-<div align="center"> <img src="../imgs/20210206125943.png" width="600"/> </div>
-
-<div align="center"> <img src="../imgs/20210206130236.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206125554.png" width="600"/> </div><br>
 
 
 
-<div align="center"> <img src="../imgs/20210206134700.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206125943.png" width="600"/> </div>
 
-<div align="center"> <img src="../imgs/20210206151553.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206130236.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206151632.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206151739.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206152519.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206134700.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206152706.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206151553.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206155016.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206151632.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206155117.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206151739.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206155301.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206152519.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206155447.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206152706.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206155636.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206155016.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206155945.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206155117.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206160019.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206155301.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206160059.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206155447.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206160119.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206155636.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206160215.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206155945.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206165841.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206160019.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206170000.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206160059.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206170403.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206160119.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206174112.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206160215.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206174505.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206165841.png" width="600"/> </div><br>
+
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206170000.png" width="600"/> </div><br>
+
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206170403.png" width="600"/> </div><br>
+
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206174112.png" width="600"/> </div><br>
+
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206174505.png" width="600"/> </div><br>
 
 ## 分析日志
 
-<div align="center"> <img src="../imgs/20210206175111.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206175111.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206175528.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206175528.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206175604.png"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206175604.png"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206175724.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206175724.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206175825.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206175825.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206175858.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206175858.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206175927.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206175927.png" width="600"/> </div><br>
 
 ### Minor GC日志解析
 
-<div align="center"> <img src="../imgs/20210206180117.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206180117.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206180146.png" /> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206180146.png" /> </div><br>
 
-<div align="center"> <img src="../imgs/20210206180352.png" /> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206180352.png" /> </div><br>
 
 ### Full GC日志分析
 
-<div align="center"> <img src="../imgs/20210206181546.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206181546.png" width="600"/> </div><br>
 
 
 
-<div align="center"> <img src="../imgs/20210206181434.png" /> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206181434.png" /> </div><br>
 
-<div align="center"> <img src="../imgs/20210206181840.png" /> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206181840.png" /> </div><br>
 
 ### GC Easy
 
-<div align="center"> <img src="../imgs/20210206182018.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206182018.png" width="600"/> </div><br>
 
-<div align="center"> <img src="../imgs/20210206182329.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206182329.png" width="600"/> </div><br>
 
 ### GCViewer
 
-<div align="center"> <img src="../imgs/20210206182912.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206182912.png" width="600"/> </div><br>
 
 ## 性能优化
 
-<div align="center"> <img src="../imgs/20210206184732.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20210206184732.png" width="600"/> </div><br>
 
 
 

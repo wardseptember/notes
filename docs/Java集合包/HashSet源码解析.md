@@ -14,7 +14,7 @@ HashSet默认是一个容量为16，装载因子为0.75的集合，hashset的所
 
 * [HashMap源码解析](https://wardseptember.gitee.io/mynotes/#/docs/Java集合包/HashMap详解(1.7和1.8))
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201206122548.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201206122548.png" width="600"/> </div><br>
 
 # 源码
 

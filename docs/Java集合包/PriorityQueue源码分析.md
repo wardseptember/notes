@@ -6,7 +6,7 @@ PriorityQueue 一个基于优先级的无界优先级队列。优先级队列的
 
 PriorityQueue默认是一个容量为11的小顶堆，堆顶是最小的元素，内部通过堆排序实现有序，存储使用Object数组。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201205211545.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201205211545.png" width="600"/> </div><br>
 
 # 源码
 

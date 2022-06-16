@@ -8,7 +8,7 @@ AQS使用一个volatile的int类型的成员变量来表示同步状态，通过
 
 它维护了一个volatile int state（代表共享资源）和一个FIFO线程等待队列（多线程争用资源被阻塞时会进入此队列）。
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201208192923.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201208192923.png" width="600"/> </div><br>
 
 AQS定义两种资源共享方式：Exclusive（独占，只有一个线程能执行，如ReentrantLock）和Share（共享，多个线程可同时执行，如Semaphore/CountDownLatch）。
 

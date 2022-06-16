@@ -11,7 +11,7 @@ TreeMap具有如下特点：
 - 可以对元素进行排序；
 - 无序集合（插入和遍历顺序不一致）；
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201206195715.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201206195715.png" width="600"/> </div><br>
 
 TreeMap继承于AbstractMap，实现了Map, Cloneable, NavigableMap, Serializable接口。
 

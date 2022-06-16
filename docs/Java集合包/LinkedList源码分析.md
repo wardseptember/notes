@@ -6,13 +6,13 @@ LinkedList是一个实现了List接口和Deque接口的双端链表。 LinkedLis
 List list=Collections.synchronizedList(new LinkedList(...));
 ```
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201202170755.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201202170755.png" width="600"/> </div><br>
 
 # 实现原理
 
 双端链表
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201202194657.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201202194657.png" width="600"/> </div><br>
 
 双端链表节点：
 
@@ -1098,5 +1098,5 @@ public class LinkedList<E>
 
 ---
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/gzh.jpg" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/gzh.jpg" width="600"/> </div><br>
 

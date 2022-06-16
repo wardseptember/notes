@@ -60,7 +60,7 @@ t.start();
 
 Thread的状态有6中，它把就绪状态和运行状态都归为RUNNABLE了，下面状态图细分了一下
 
-<div align="center"> <img src="https://gitee.com/wardseptember/images/raw/master/imgs/20201210215313.png" width="600"/> </div><br>
+<div align="center"> <img src="../../imgs/20201210215313.png" width="600"/> </div><br>
 
 >注意：
 >

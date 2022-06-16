@@ -6,11 +6,11 @@
 
 Segment 继承了 ReentrantLock,所以 Segment 是一种可重入锁，扮演锁的⻆色。HashEntry 用于存储 键值对数据。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200928220201.png)
+![](../../imgs/20200928220201.png)
 
 一个 ConcurrentHashMap 里包含一个 Segment 数组。Segment 的结构和 HashMap 类似，是一种数组 和链表结构，一个 Segment 包含一个 HashEntry 数组，每个 HashEntry 是一个链表结构的元素，每 个 Segment 守护着一个 HashEntry 数组里的元素，当对 HashEntry 数组的数据进行修改时，必须首 先获得对应的 Segment 的锁。
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200928221841.png)
+![](../../imgs/20200928221841.png)
 
 ## put操作
 
@@ -50,7 +50,7 @@ ConcurrentHashMap不允许空值空键
 
 ConcurrentHashMap 取消了 Segment 分段锁，采用 CAS 和 synchronized 来保证并发安全。数据结构 跟 HashMap1.8 的结构类似，数组+链表/红黑二叉树。Java 8 在链表⻓度超过一定阈值(8)时将链表 (寻址时间复杂度为 O(N))转换为红黑树(寻址时间复杂度为 O(log(N)))
 
-![](https://gitee.com/wardseptember/images/raw/master/imgs/20200928220802.png)
+![](../../imgs/20200928220802.png)
 
 synchronized 只锁定当前链表或红黑二叉树的首节点，这样只要 hash 不冲突，就不会产生并发，效 率又提升 N 倍。
 
