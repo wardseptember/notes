@@ -2298,7 +2298,7 @@ Java标准库自带的`java.util`包提供了集合类：`Collection`，它是�
 - `Set`：一种保证没有重复元素的集合，例如，所有无重复名称的`Student`的`Set`；
 - `Map`：一种通过键值（key-value）查找的映射表集合，例如，根据`Student`的`name`查找对应`Student`的`Map`。
 
-<div align="center"> <img src="../imgs/FgPceiQ8m6EUWxVQtN6Riy5-FSYo" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/FgPceiQ8m6EUWxVQtN6Riy5-FSYo" width="600"/> </div><br>
 
 最后，Java访问集合总是通过统一的方式——迭代器（Iterator）来实现，它最明显的好处在于无需知道集合内部元素是按什么方式存储的。
 

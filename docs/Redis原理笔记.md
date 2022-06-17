@@ -219,7 +219,7 @@ redis4.0相对与3.X版本其中一个比较大的变化是4.0添加了新的混
 
 混合持久化同样也是通过bgrewriteaof完成的，不同的是当开启混合持久化时，fork出的子进程先将共享的内存副本全量的以RDB方式写入aof文件，然后在将重写缓冲区的增量命令以AOF方式写入到文件，写入完成后通知主进程更新统计信息，并将新的含有RDB格式和AOF格式的AOF文件替换旧的的AOF文件。简单的说：新的AOF文件前半段是RDB格式的全量数据后半段是AOF格式的增量数据，如下图：
 
-<div align="center"> <img src="../imgs/20201030131617.png" width="600"/> </div><br>
+<div align="center"> <img src="https://raw.githubusercontent.com/wardseptember/notes/master/imgs/20201030131617.png" width="600"/> </div><br>
 
 ### 数据恢复
 
